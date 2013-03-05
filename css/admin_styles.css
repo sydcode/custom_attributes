@@ -1,0 +1,159 @@
+/* Admin stylesheet for the Custom Attributes plugin */
+
+#custom_attributes {
+	clear: both;
+	overflow: hidden;
+}
+
+#custom_attributes .heading {
+	margin-bottom: 20px; 
+	margin-top: 0;
+}
+
+#custom_attributes .group-heading {
+	margin: 10px 0; 
+}
+
+#custom_attributes .config_column {
+	float: left;
+	margin-right: 80px;
+}
+
+#custom_attributes .sub_heading {
+	margin-bottom: 10px; 
+	margin-top: 0;
+}
+
+#custom_attributes .heading_input {
+	padding: 4px; 
+	width: 210px;
+}
+
+#custom_attributes .btn {
+	line-height: 11px; 
+	width: 80px;
+}
+
+#custom_attributes .create_group,
+#custom_attributes .edit_group,
+#custom_attributes .select_group,
+#custom_attributes .group_name,
+#custom_attributes .group_heading,
+#custom_attributes .add_attribute {
+	margin-bottom: 25px;
+}
+
+#custom_attributes .text_input {
+	padding: 4px; 
+	width: 210px;
+}
+
+#custom_attributes .field_options {
+	display: none;
+}
+
+#custom_attributes .options_text {
+	color: #999; 
+	display: block;
+	font-size: 11px;
+}
+
+#custom_attributes  .edit_checkbox,
+#custom_attributes  .radio_button {
+	margin: 0 5px 0 0;
+}
+
+#custom_attributes .radio_button_label {
+	margin: 5px 0 0 0;
+}
+
+#custom_attributes .required_input {
+	color: #f00;
+	margin-left: 10px;
+}
+
+#custom_attributes .field_required {
+	margin-right: 25px;
+}
+
+#custom_attributes .checkbox_input,
+#custom_attributes #alpha_order, 
+#custom_attributes #custom_order {
+	margin-right: 7px;
+}
+
+#custom_attributes .select_option {
+	border-bottom: 1px dotted;
+}
+
+#custom_attributes .attribute_list,
+#custom_attributes .group_list {
+	margin: 0; 
+	padding: 0; 
+	width: 245px;
+}
+
+#custom_attributes .category_div {
+	padding: 5px 7px 5px 10px;
+}
+
+#custom_attributes .attribute_label,
+#custom_attributes .group_title {
+	cursor: pointer; 
+	overflow: hidden;
+}
+
+#custom_attributes .arrow_open {
+	float: right;
+}
+
+#custom_attributes .arrow_close {
+	display: none; 
+	float: right;
+}
+
+#custom_attributes .attribute_panel,
+#custom_attributes .value_panel,
+#custom_attributes .group_panel {
+	display: none; 
+	margin: 0 0 5px 0;
+	padding: 0;
+}
+
+#custom_attributes .edit_label,
+#custom_attributes .edit_options  {
+	padding: 4px; 
+	width: 210px;
+}
+
+#custom_attributes .radio_label {
+	margin-left: 30px;
+}
+
+#custom_attributes .sortable {
+	margin: 0;
+	padding: 0;
+}
+
+#custom_attributes .sortable_item {
+	cursor: move; 
+	width: 220px;
+}
+
+#custom_attributes .name-cat {
+	padding: 0;
+}
+
+#custom_attributes .category_row {
+	padding-left: 40px;
+}
+
+#custom_attributes .value_list {
+	margin: 0; 
+	padding: 0; 
+	width: 550px;
+}
+
+#custom_attributes #category_tree {
+	display: none;
+}
