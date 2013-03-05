@@ -1,18 +1,3 @@
-Custom Attributes 
-
-Version Beta
-
-Create custom attributes for listings.
-
-Made by sydcode.
-http://forums.osclass.org/index.php?action=profile;u=12290
-
-Thanks to sharkey for sponsoring this plugin!
-http://forums.osclass.org/index.php?action=profile;u=11728
-
-March 2013
-
-======================================================
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
