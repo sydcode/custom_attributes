@@ -232,9 +232,7 @@ function ca_select_options($field_id, $value = null) {
  */
 function ca_radio_buttons($field_id, $name, $value = null, $required = null) {
 	$options = Attributes::newInstance()->getOptions($field_id, $value);
-	if (empty($options)) { 
-		return;
-	}
+	if (empty($options)) return;
 	if (empty($required)) {
 		$class = '';
 	} else {
@@ -299,16 +297,18 @@ function ca_delete_item($item_id) {
  */
 function ca_pre_item_post() {
 	$fields = Params::getParam('fields');
-	foreach ($fields as $id) {
-		$field = Attributes::newInstance()->getField($id);
-		$type = $field['s_type'];
-		$name = 'field_' . $id;
-		$value = Params::getParam($name);
-		if ($type == 'checkbox' && empty($value)) {
-			$value = 'unchecked';
-		} 
-		Session::newInstance()->_setForm($name, $value);
-		Session::newInstance()->_keepForm($name);
+	if (!empty($fields) && is_array($fields)) {
+		foreach ($fields as $id) {
+			$field = Attributes::newInstance()->getField($id);
+			$type = $field['s_type'];
+			$name = 'field_' . $id;
+			$value = Params::getParam($name);
+			if ($type == 'checkbox' && empty($value)) {
+				$value = 'unchecked';
+			} 
+			Session::newInstance()->_setForm($name, $value);
+			Session::newInstance()->_keepForm($name);
+		}
 	}
 }
 
@@ -317,9 +317,11 @@ function ca_pre_item_post() {
  */
 function ca_save_inputs_session() {
 	$fields = Params::getParam('fields');
-	foreach ($fields as $id) {
-		$name = 'field_' . $id;
-		Session::newInstance()->_keepForm($name);
+	if (!empty($fields) && is_array($fields)) {
+		foreach ($fields as $id) {
+			$name = 'field_' . $id;
+			Session::newInstance()->_keepForm($name);
+		}
 	}
 }
 

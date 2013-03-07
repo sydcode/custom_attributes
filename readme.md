@@ -4,6 +4,9 @@ Custom Attributes
 A plugin for [Osclass](http://osclass.org), a free and open source classifieds script.
 This plugin allows custom attributes to be added to listings.
 
+## Requirements
+Version 3.0 or greater
+
 ## Quick Start
 * Download the latest release [here](https://github.com/sydcode/custom_attributes/archive/master.zip)
 * Clone the git repo — git clone https://github.com/sydcode/custom_attributes.git
