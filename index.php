@@ -219,7 +219,7 @@ function ca_select_options($field_id, $value = null) {
 		} else {
 			$selected = '';
 		}
-		$output .= "<option value='" . $option . "'" . $selected . ">" . __($option, PLUGIN_NAME) . "</option>" . PHP_EOL;
+		$output .= "<option value='" . $option . "'" . $selected . ">" . $option . "</option>" . PHP_EOL;
 	}
 	echo $output;
 }
@@ -249,7 +249,7 @@ function ca_radio_buttons($field_id, $name, $value = null, $required = null) {
 		}
 		$output .= "<div><label class='radio_button_label'>";
 		$output .= "<input class='radio_button' type='radio' name='" . $name . "'" . $class . " value='" . $option . "'" . $checked . " />";
-		$output .= __($option, PLUGIN_NAME) . "</label></div>" . PHP_EOL;
+		$output .= $option . "</label></div>" . PHP_EOL;
 	}
 	echo $output;
 }

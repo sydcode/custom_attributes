@@ -11,8 +11,8 @@ foreach ($fields as $field) {
 	}
 ?>
 			<tr>
-				<td class='detail_label'><?php _e($label, PLUGIN_NAME); ?></td>
-				<td class='detail_label'><?php _e($value, PLUGIN_NAME); ?></td>
+				<td class='detail_label'><?php echo $label; ?></td>
+				<td class='detail_label'><?php echo $value; ?></td>
 			</tr>
 <?php } ?>
 		</tbody>

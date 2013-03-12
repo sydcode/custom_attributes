@@ -11,7 +11,7 @@ foreach ($groups as $group) {
 	if(!empty($fields)) {
 		if (!empty($heading)) {
 ?>
-	<h3 class='render-title group-heading'><?php _e($heading, PLUGIN_NAME); ?></h3>
+	<h3 class='render-title group-heading'><?php echo $heading; ?></h3>
 <?php
 		}	
 		include 'item_edit_fields.php';

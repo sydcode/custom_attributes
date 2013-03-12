@@ -90,7 +90,7 @@ foreach ($groups as $group) {
 		$selected = '';
 	}
 ?>
-					<option value='<?php echo $id; ?>'<?php echo $selected; ?>><?php _e($name, PLUGIN_NAME); ?></option>
+					<option value='<?php echo $id; ?>'<?php echo $selected; ?>><?php echo $name; ?></option>
 <?php	}	?>
 				</select>
 				<p><button class='btn btn-mini' type='submit'><?php _e('Edit', PLUGIN_NAME); ?></button></p>
@@ -141,7 +141,7 @@ foreach ($fields as $field) {
 	$id = $field['pk_i_id'];
 	$label = trim($field['s_label']);
 ?>
-					<option value='<?php echo $id; ?>'><?php echo _e($label, PLUGIN_NAME); ?></option>
+					<option value='<?php echo $id; ?>'><?php echo $label; ?></option>
 <?php	}	?>
 				</select>
 				<p><button class='btn btn-mini' type='submit'><?php _e('Delete', PLUGIN_NAME); ?></button></p>
@@ -167,7 +167,7 @@ foreach ($fields as $field) {
 ?>
 					<li class='category_div'>
 						<div class='attribute_label'>
-							<?php _e($label, PLUGIN_NAME); ?>
+							<?php echo $label; ?>
 							<img class='arrow_open' src='<?php echo osc_plugin_url(__FILE__); ?>css/arrow_open.png' alt='' />
 							<img class='arrow_close' src='<?php echo osc_plugin_url(__FILE__); ?>css/arrow_close.png' alt='' />
 						</div>
@@ -179,7 +179,7 @@ foreach ($fields as $field) {
 								<input type='hidden' name='plugin_action' value='edit_attribute' />		
 								<input type='hidden' name='field_id' value='<?php echo $field_id; ?>' />								
 								<input type='hidden' name='group_id' value='<?php echo $group_id; ?>' />								
-								<li><input class='edit_label' type='text' name='edit_label' value='<?php _e($label, PLUGIN_NAME); ?>' /></li>
+								<li><input class='edit_label' type='text' name='edit_label' value='<?php echo $label; ?>' /></li>
 <?php if (!empty($options)) { ?>								
 								<li>
 									<input type='text' class='edit_options' name='edit_options' value='<?php echo $options; ?>' /><br />
@@ -245,7 +245,7 @@ foreach ($custom_fields as $field) {
 							<div class='category_div enabled'>
 								<div class='category_row'>					
 									<div class='handle ico ico-32 ico-droppable'></div>
-									<div class='name-cat'><?php _e($label, PLUGIN_NAME); ?></div>
+									<div class='name-cat'><?php echo $label; ?></div>
 									<input type='hidden' name='field_<?php echo $field_id; ?>' value='<?php echo $counter; ?>' />
 								</div>
 							</div>

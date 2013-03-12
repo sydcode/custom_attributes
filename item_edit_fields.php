@@ -20,18 +20,18 @@ foreach ($fields as $field) {
 ?>
 			<tr class='edit_row'>
 				<input type='hidden' name='fields[]' value='<?php echo $field_id; ?>' />
-				<td><label class='edit_label' for='<?php echo $name ?>'><?php _e($label, PLUGIN_NAME); ?></label></td>
+				<td><label class='edit_label' for='<?php echo $name; ?>'><?php echo $label; ?></label></td>
 				<td>
 <?php if ($type == 'text') { ?>
-					<input id='<?php echo $name ?>'<?php echo $class ?> type='text' name='<?php echo $name ?>' value='<?php _e($value, PLUGIN_NAME); ?>' />
+					<input id='<?php echo $name; ?>'<?php echo $class; ?> type='text' name='<?php echo $name; ?>' value='<?php echo $value; ?>' />
 <?php } else if ($type == 'checkbox') {  ?>
 <?php 	$checked = ($value == 'checked') ? " checked='checked'" : ''; ?>
 					<label>
-						<input id='<?php echo $name ?>' class='edit_checkbox' type='checkbox' name='<?php echo $name ?>' value='checked'<?php echo $checked ?> />
+						<input id='<?php echo $name; ?>' class='edit_checkbox' type='checkbox' name='<?php echo $name; ?>' value='checked'<?php echo $checked; ?> />
 						<?php _e('Tick for "Yes"', PLUGIN_NAME); ?>
 					</label>
 <?php } else if ($type == 'select') { ?>		
-					<select id='<?php echo $name ?>'<?php echo $class ?> name='<?php echo $name; ?>'>
+					<select id='<?php echo $name; ?>'<?php echo $class; ?> name='<?php echo $name; ?>'>
 <?php ca_select_options($field_id, $value); ?>
 					</select>
 <?php } else if ($type == 'radio') { ?>						

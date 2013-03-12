@@ -41,7 +41,7 @@ foreach ($groups as $group) {
 		$selected = '';
 	}
 ?>
-					<option value='<?php echo $id; ?>'<?php echo $selected; ?>><?php _e($name, PLUGIN_NAME); ?></option>
+					<option value='<?php echo $id; ?>'<?php echo $selected; ?>><?php echo $name; ?></option>
 <?php	}	?>
 				</select>
 				<p><button class='btn btn-mini' type='submit'><?php _e('Edit', PLUGIN_NAME); ?></button></p>
@@ -72,7 +72,7 @@ foreach ($fields as $field) {
 		$selected = '';
 	}
 ?>
-					<option value='<?php echo $field_id; ?>'<?php echo $selected; ?>><?php _e($label, PLUGIN_NAME) ?></option>
+					<option value='<?php echo $field_id; ?>'<?php echo $selected; ?>><?php echo $label; ?></option>
 <?php	}	?>
 				</select>
 				<p><button class='btn btn-mini' type='submit'><?php _e('Edit', PLUGIN_NAME); ?></button></p>
@@ -92,11 +92,10 @@ foreach ($values as $value) {
 	$item_id = $value['fk_i_item_id'];
 	$value = trim($value['s_value']);
 	$title = Attributes::newInstance()->getItemTitle($item_id);
-	$title = __($title, PLUGIN_NAME);
 ?>
 				<li class='category_div'>
 					<div class='item_title attribute_label'>
-						<?php _e($title, PLUGIN_NAME) ?>
+						<?php echo $title; ?>
 						<img class='arrow_open' src='<?php echo osc_plugin_url(__FILE__); ?>css/arrow_open.png' alt='' />
 						<img class='arrow_close' src='<?php echo osc_plugin_url(__FILE__); ?>css/arrow_close.png' alt='' />
 					</div>
@@ -110,11 +109,11 @@ foreach ($values as $value) {
 							<input type='hidden' name='field_id' value='<?php echo $field_id; ?>' />	
 							<li>
 <?php if ($type == 'text') { ?>
-								<input id='<?php echo $name ?>'<?php echo $class ?> type='text' name='item_value' value='<?php _e($value, PLUGIN_NAME); ?>' />
+								<input id='<?php echo $name; ?>'<?php echo $class; ?> type='text' name='item_value' value='<?php echo $value; ?>' />
 <?php } else if ($type == 'checkbox') {  ?>
 <?php 	$checked = ($value == 'checked') ? " checked='checked'" : ''; ?>
 								<label>
-								<input class='edit_checkbox' type='checkbox' name='item_value' value='checked'<?php echo $checked ?> />
+								<input class='edit_checkbox' type='checkbox' name='item_value' value='checked'<?php echo $checked; ?> />
 								<?php _e('Tick for "Yes"', PLUGIN_NAME); ?></label>
 <?php } else if ($type == 'select') { ?>		
 								<select name='item_value'>

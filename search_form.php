@@ -11,7 +11,7 @@ foreach ($groups as $group) {
 	if(!empty($fields)) {
 		if (!empty($heading)) {
 ?>
-	<h4 class='search_heading'><?php _e($heading, PLUGIN_NAME); ?></h4>
+	<h4 class='search_heading'><?php echo $heading; ?></h4>
 <?php
 		}	
 		include 'search_form_fields.php';

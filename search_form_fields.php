@@ -9,9 +9,9 @@ foreach ($fields as $field) {
 	$value = Params::getParam($name);
 ?>
 	<div class='row one_input'>
-		<h6><?php _e($label, PLUGIN_NAME); ?></h6>
+		<h6><?php echo $label; ?></h6>
 <?php if ($type == 'text') { ?>
-			<input type='text' name='<?php echo $name; ?>' value='<?php _e($value, PLUGIN_NAME); ?>' />
+			<input type='text' name='<?php echo $name; ?>' value='<?php echo $value; ?>' />
 <?php } else if ($type == 'checkbox') { ?>
 <?php   $checked = ($value == 'checked') ? " checked='checked'" : ''; ?>
 				<input class='search_checkbox' type='checkbox' id='<?php echo $name; ?>' name='<?php echo $name; ?>' value='checked'<?php echo $checked; ?> />
