@@ -1,0 +1,218 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Attributes\n"
+"POT-Creation-Date: 2013-03-12 14:31+1000\n"
+"PO-Revision-Date: 2013-03-12 16:02+1000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: conf.php:18
+msgid "Attribute added"
+msgstr ""
+
+#: conf.php:25
+msgid "Attribute deleted"
+msgstr ""
+
+#: conf.php:43
+msgid "Attribute order saved"
+msgstr ""
+
+#: conf.php:54
+msgid "Attribute saved"
+msgstr ""
+
+#: conf.php:56
+msgid "Attribute label required"
+msgstr ""
+
+#: conf.php:70 conf_groups.php:56 conf_values.php:21 index.php:263
+msgid "Custom Attributes"
+msgstr ""
+
+#: conf.php:74 conf_values.php:25
+msgid "Select Group"
+msgstr ""
+
+#: conf.php:81 conf_groups.php:78 conf_groups.php:92 conf_values.php:32
+msgid "Select a group"
+msgstr ""
+
+#: conf.php:96 conf_groups.php:81 conf_values.php:47 conf_values.php:78
+msgid "Edit"
+msgstr ""
+
+#: conf.php:101
+msgid "Add Attribute"
+msgstr ""
+
+#: conf.php:111 conf.php:186
+msgid "Separate options with commas (eg. a, b, c)."
+msgstr ""
+
+#: conf.php:115 conf.php:191
+msgid "Text"
+msgstr ""
+
+#: conf.php:116 conf.php:192
+msgid "Select"
+msgstr ""
+
+#: conf.php:117 conf.php:193
+msgid "Radio"
+msgstr ""
+
+#: conf.php:118 conf.php:194
+msgid "Checkbox"
+msgstr ""
+
+#: conf.php:122 conf.php:198
+msgid "Require"
+msgstr ""
+
+#: conf.php:123 conf.php:199
+msgid "Search"
+msgstr ""
+
+#: conf.php:125 conf_groups.php:66
+msgid "Create"
+msgstr ""
+
+#: conf.php:130
+msgid "Delete Attribute"
+msgstr ""
+
+#: conf.php:138 conf_values.php:63
+msgid "Select an attribute"
+msgstr ""
+
+#: conf.php:147 conf_groups.php:95
+msgid "Delete"
+msgstr ""
+
+#: conf.php:154 index.php:267
+msgid "Edit Attributes"
+msgstr ""
+
+#: conf.php:201 conf.php:256 conf_values.php:127
+msgid "Save"
+msgstr ""
+
+#: conf.php:211
+msgid "Order Attributes"
+msgstr ""
+
+#: conf.php:232
+msgid "Alphabetical"
+msgstr ""
+
+#: conf.php:233
+msgid "Custom"
+msgstr ""
+
+#: conf_groups.php:15
+msgid "Group created."
+msgstr ""
+
+#: conf_groups.php:17
+msgid "That group already exists, please choose another name."
+msgstr ""
+
+#: conf_groups.php:24
+msgid "Group deleted."
+msgstr ""
+
+#: conf_groups.php:29
+msgid "Name updated."
+msgstr ""
+
+#: conf_groups.php:34
+msgid "Heading updated."
+msgstr ""
+
+#: conf_groups.php:39
+msgid "Categories updated."
+msgstr ""
+
+#: conf_groups.php:59
+msgid "Create Group"
+msgstr ""
+
+#: conf_groups.php:71
+msgid "Edit Group"
+msgstr ""
+
+#: conf_groups.php:85
+msgid "Delete Group"
+msgstr ""
+
+#: conf_groups.php:109
+msgid "Name"
+msgstr ""
+
+#: conf_groups.php:117 conf_groups.php:129 conf_groups.php:149
+msgid "Update"
+msgstr ""
+
+#: conf_groups.php:121
+msgid "Heading"
+msgstr ""
+
+#: conf_groups.php:133
+msgid "Categories"
+msgstr ""
+
+#: conf_groups.php:142
+msgid "Check all"
+msgstr ""
+
+#: conf_groups.php:143
+msgid "Uncheck all"
+msgstr ""
+
+#: conf_values.php:13
+msgid "Value saved"
+msgstr ""
+
+#: conf_values.php:52
+msgid "Select Attribute"
+msgstr ""
+
+#: conf_values.php:54
+msgid "There are no attributes."
+msgstr ""
+
+#: conf_values.php:85 index.php:268
+msgid "Edit Values"
+msgstr ""
+
+#: conf_values.php:118 item_edit_fields.php:31
+msgid "Tick for \"Yes\""
+msgstr ""
+
+#: index.php:214
+msgid "Select a value"
+msgstr ""
+
+#: index.php:265
+msgid "Configure Plugin"
+msgstr ""
+
+#: index.php:266
+msgid "Edit Groups"
+msgstr ""
+
+#: item_edit_fields.php:43
+msgid "Required"
+msgstr ""
+
+#: search_form_fields.php:18
+msgid "Check to show listings"
+msgstr ""
