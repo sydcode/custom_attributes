@@ -43,6 +43,7 @@ if (!empty($action)) {
 
 // Build group options for dropdowns
 $groups = Attributes::newInstance()->getGroups();
+$group_options = '';
 foreach ($groups as $group) {
 	$id = $group['pk_i_id'];
 	$name = trim($group['s_name']);
