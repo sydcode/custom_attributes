@@ -4,27 +4,49 @@
 
 jQuery(document).ready(function($) {
 	
-	/* Show or hide fields when type is changed */
-	$('.field_type').change(function() {
-		switch($(this).val()) {
-			case 'text':
-				$(this).parent().parent().prev().hide();
-				$(this).parent().parent().next().find('.field_required').show();	
-				break;
-			case 'select':	
-				$(this).parent().parent().prev().show();
-				$(this).parent().parent().next().find('.field_required').show();
-				break;
-			case 'radio':	
-				$(this).parent().parent().prev().show();
-				$(this).parent().parent().next().find('.field_required').show();
-				break;					
-			case 'checkbox': 
-				$(this).parent().parent().prev().hide();
-				$(this).parent().parent().next().find('.field_required').hide();
-				break;
-		}
+	/* Inital setup */
+	$('.field_type').each(function() {
+		updateFieldType($(this));
 	});
+	
+	/* Show or hide options when type is changed */
+	$('.field_type').change(function() {
+		updateFieldType($(this));
+	});
+	
+	function updateFieldType($element) {
+		var $parent = $element.parent().parent();
+		switch($element.val()) {
+			case 'checkbox': 
+				$parent.prev().hide();
+				$parent.next().children('.required, .range').hide();
+				break;		
+			case 'date': 
+				$parent.prev().hide();
+				$parent.next().children('.required').show();
+				$parent.next().children('.range').hide();
+				break;					
+			case 'radio':	
+				$parent.prev().show();
+				$parent.next().children('.required').show();
+				$parent.next().children('.range').hide();
+				break;					
+			case 'select':	
+				$parent.prev().show();
+				$parent.next().children('.required').show();
+				$parent.next().children('.range').hide();
+				break;
+			case 'text':
+				$parent.prev().hide();
+				$parent.next().children('.required, .range').show();	
+				break;	
+			case 'textarea':
+				$parent.prev().hide();
+				$parent.next().children('.required').show();	
+				$parent.next().children('.range').hide();
+				break;				
+		}
+	}
 	
 	/* Create sortable list of attributes that reorders when changed */		
 	$('.sortable').sortable({
