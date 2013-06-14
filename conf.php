@@ -123,9 +123,9 @@ foreach ($groups as $group) {
 					</select>
 				</p>
 				<p>
-					<label><input class='checkbox_input' type='checkbox' name='field_required' value='1' /><?php _e('Require', PLUGIN_NAME); ?><br /></label>
+					<label class='required'><input class='checkbox_input' type='checkbox' name='field_required' value='1' /><?php _e('Require', PLUGIN_NAME); ?><br /></label>
 					<label><input class='checkbox_input' type='checkbox' name='field_search' value='1' checked='checked' /><?php _e('Search', PLUGIN_NAME); ?><br /></label>
-					<label><input class='checkbox_input' type='checkbox' name='field_search_limits' value='1' /><?php _e('Search Limits', PLUGIN_NAME); ?><br /></label>
+					<label class='range'><input class='checkbox_input' type='checkbox' name='field_search_limits' value='1' /><?php _e('Search Limits', PLUGIN_NAME); ?><br /></label>
 				</p>
 				<p><button class='btn btn-mini' type='submit'><?php _e('Create', PLUGIN_NAME); ?></button></p>
 			</form>
@@ -203,9 +203,9 @@ foreach ($fields as $field) {
 									</select>
 								</li>
 								<li>
-									<label><input class='checkbox_input' type='checkbox' name='edit_required' value='1'<?php if ($required) echo " checked='checked'"; ?> /><?php _e('Require', PLUGIN_NAME); ?><br /></label>
+									<label class='required'><input class='checkbox_input' type='checkbox' name='edit_required' value='1'<?php if ($required) echo " checked='checked'"; ?> /><?php _e('Require', PLUGIN_NAME); ?><br /></label>
 									<label><input class='checkbox_input' type='checkbox' name='edit_search' value='1'<?php if ($search) echo " checked='checked'"; ?> /><?php _e('Search', PLUGIN_NAME); ?><br /></label>
-									<label'><input class='checkbox_input' type='checkbox' name='edit_search_limits' value='1'<?php if ($search_limits) echo " checked='checked'"; ?> /><?php _e('Search Limits', PLUGIN_NAME); ?></label>						
+									<label class='range'><input class='checkbox_input' type='checkbox' name='edit_search_limits' value='1'<?php if ($search_limits) echo " checked='checked'"; ?> /><?php _e('Search Limits', PLUGIN_NAME); ?></label>						
 								</li>
 								<li><button class='btn btn-mini' type='submit'><?php _e('Save', PLUGIN_NAME); ?></button></li>
 							</form>
