@@ -12,11 +12,13 @@ Version 3.0 or greater
 * Clone the git repo — git clone https://github.com/sydcode/custom_attributes.git
 
 ## Features
-* Four input types (text, select, radio, and checkbox).
+* Six input types (checkbox, date, radio, select, text, and textarea).
 * Full editing of inputs and values.
-* Values can be made required or searchable.
+* Input options are required, searchable, and range search (text only). 
+* Date input shows popup calendar for easy selection.
 * Alphabetical or custom ordering of attributes.
 * Attribute groups, with category selection and optional heading.
+* Theme stylesheets (Modern, Blender).
 
 ## Credits
 * [sharkey](http://forums.osclass.org/index.php?action=profile;u=11728), who hired me to build this plugin.
