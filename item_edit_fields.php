@@ -45,6 +45,8 @@ foreach ($fields as $field) {
 					</select>
 <?php } else if ($type == 'radio') { ?>						
 					<?php ca_radio_buttons($field_id, $name, $value, $required); ?>
+<?php } elseif ($type == 'textarea') {  ?>
+					<textarea id='<?php echo $name; ?>'<?php echo $class; ?> name='<?php echo $name; ?>'><?php echo $value; ?></textarea>							
 <?php } ?>
 				</td>
 				<td>

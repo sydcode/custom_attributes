@@ -67,3 +67,7 @@
 	margin: 3px 3px 0 0;
 	width: auto;
 }
+
+#custom_attributes .search_textarea {
+	width: 174px;
+}

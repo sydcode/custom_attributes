@@ -117,6 +117,7 @@ foreach ($groups as $group) {
 						<option value='radio'><?php _e('Radio', PLUGIN_NAME); ?></option>
 						<option value='select'><?php _e('Select', PLUGIN_NAME); ?></option>
 						<option value='text'><?php _e('Text', PLUGIN_NAME); ?></option>
+						<option value='textarea'><?php _e('Text Area', PLUGIN_NAME); ?></option>							
 					</select>
 				</p>
 				<p>
@@ -194,6 +195,7 @@ foreach ($fields as $field) {
 										<option value='select'<?php if ($type == 'select') echo " selected='selected'"; ?>><?php _e('Select', PLUGIN_NAME); ?></option>
 										<option value='radio'<?php if ($type == 'radio') echo " selected='selected'"; ?>><?php _e('Radio', PLUGIN_NAME); ?></option>
 										<option value='checkbox'<?php if ($type == 'checkbox') echo " selected='selected'"; ?>><?php _e('Checkbox', PLUGIN_NAME); ?></option>
+										<option value='textarea'<?php if ($type == 'textarea') echo " selected='selected'"; ?>><?php _e('Text Area', PLUGIN_NAME); ?></option>										
 									</select>
 								</li>
 								<li>

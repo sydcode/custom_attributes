@@ -123,6 +123,8 @@ foreach ($values as $value) {
 								</select>
 <?php } else if ($type == 'radio') { ?>						
 								<?php ca_radio_buttons($field_id, 'item_value', $value, $required); ?>
+<?php } elseif ($type == 'textarea') {  ?>
+								<textarea id='<?php echo $name; ?>' name='item_value'><?php echo $value; ?></textarea>											
 <?php } ?>							
 							</li>
 							<li><button class='btn btn-mini' type='submit'><?php _e('Save', PLUGIN_NAME); ?></button></li>

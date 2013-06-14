@@ -141,7 +141,7 @@ function ca_search_conditions($params = null) {
 		$field_type = Attributes::newInstance()->getFieldType($field_id);
 		if ($field_id == $key || empty($value)) continue;
 		$subquery = "SELECT fk_i_item_id FROM " . $values_table . " WHERE fk_i_field_id = " . $field_id;
-		if ($field_type == 'text') {
+		if ($field_type == 'text' || $field_type == 'textarea') {
 			$subquery .= " AND s_value LIKE '%" . $value . "%'";
 		} else {
 			$subquery .= " AND s_value = '" . $value . "'";
