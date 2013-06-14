@@ -251,9 +251,11 @@ class Attributes extends DAO {
 			$this->dao->select('fk_i_field_id');
 			$this->dao->from($this->getTable_Meta());
 			$results = $this->dao->get();
-			$results = $results->result();
-			foreach ($results as $result) {
-				$group_fields[] = $result['fk_i_field_id'];
+			if ($results) {
+				$results = $results->result();
+				foreach ($results as $result) {
+					$group_fields[] = $result['fk_i_field_id'];
+				}
 			}
 		}
 		$this->dao->select();
