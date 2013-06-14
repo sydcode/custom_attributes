@@ -115,6 +115,8 @@ foreach ($values as $value) {
 								<label>
 								<input class='edit_checkbox' type='checkbox' name='item_value' value='checked'<?php echo $checked; ?> />
 								<?php _e('Tick for "Yes"', PLUGIN_NAME); ?></label>
+<?php } elseif ($type == 'date') { ?>	
+								<input id='<?php echo $name; ?>' class='edit_date' type='text' name='item_value' value='<?php echo $value; ?>' />
 <?php } else if ($type == 'select') { ?>		
 								<select name='item_value'>
 									<?php ca_select_options($field_id, $value); ?>

@@ -19,4 +19,10 @@ foreach ($groups as $group) {
 }
 ?>
 </div>
+<script type='text/javascript'>
+	/* Setup jQuery Datepicker for searching dates */
+	jQuery('#custom_attributes .search_date').datepicker({
+		dateFormat: 'yy-mm-dd'	
+	});
+</script>
 <?php //END

@@ -8,12 +8,19 @@ foreach ($fields as $field) {
 	$name = 'field_' . $field['pk_i_id'];
 	$value = Attributes::newInstance()->getValue($item_id, $field_id); 
 	$required = $field['b_required'];
+	// Build classes
 	if ($required) {
-		$class = " class='required'";
+		$class = 'required';
 	} else {
 		$class = '';
 	}
-	// get saved value from sesssion
+	if ($type == 'date') {
+		$class .= ' edit_date';
+	}
+	if (!empty($class)) {
+		$class = " class='" . trim($class) . "'";
+	}
+	// Get saved value from sesssion
 	if( Session::newInstance()->_getForm($name) != '') {
 		$value = Session::newInstance()->_getForm($name);
 	}	
@@ -30,6 +37,8 @@ foreach ($fields as $field) {
 						<input id='<?php echo $name; ?>' class='edit_checkbox' type='checkbox' name='<?php echo $name; ?>' value='checked'<?php echo $checked; ?> />
 						<?php _e('Tick for "Yes"', PLUGIN_NAME); ?>
 					</label>
+<?php } elseif ($type == 'date') { ?>	
+					<input id='<?php echo $name; ?>'<?php echo $class; ?> type='text' name='<?php echo $name; ?>' value='<?php echo $value; ?>' />					
 <?php } else if ($type == 'select') { ?>		
 					<select id='<?php echo $name; ?>'<?php echo $class; ?> name='<?php echo $name; ?>'>
 <?php ca_select_options($field_id, $value); ?>

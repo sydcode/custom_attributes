@@ -20,6 +20,11 @@ foreach ($groups as $group) {
 ?>
 <!-- end custom_attributes--></div>
 <script type='text/javascript'>
+	/* Setup jQuery Datepicker */
+	jQuery('#custom_attributes .edit_date').datepicker({
+		dateFormat: 'yy-mm-dd'
+	});
+	
 	/* Apply custom style to select fields */
 	jQuery('#custom_attributes select').each(function() {
 		selectUi($(this));

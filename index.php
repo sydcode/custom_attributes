@@ -285,11 +285,12 @@ function ca_front_header() {
 }
 
 /**
- * Add stylesheet to admin header		
+ * Add stylesheets to admin header		
  * @return text 
  */
 function ca_admin_header() {
   echo '<link href="' . osc_plugin_url(__FILE__) . 'css/admin_styles.css" rel="stylesheet" type="text/css">' . PHP_EOL;
+	echo '<link href="' . osc_base_url(false) . 'oc-includes/osclass/gui/css/jquery-ui/jquery-ui-1.8.20.custom.css" rel="stylesheet" type="text/css">' . PHP_EOL;	
 }
 
 /**
