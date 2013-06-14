@@ -100,7 +100,7 @@ foreach ($values as $value) {
 						<img class='arrow_close' src='<?php echo osc_plugin_url(__FILE__); ?>css/arrow_close.png' alt='' />
 					</div>
 					<ul class='value_panel'>
-						<form method='post' action='http://localhost/osclass/oc-admin/index.php'>
+						<form method='post' action='<?php echo osc_admin_base_url(true); ?>'>
 							<input type='hidden' name='page' value='plugins' />
 							<input type='hidden' name='action' value='renderplugin' />
 							<input type='hidden' name='file' value='<?php echo osc_plugin_folder(__FILE__); ?>conf_values.php' />
