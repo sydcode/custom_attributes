@@ -270,11 +270,18 @@ function ca_admin_menu() {
 }
 
 /**
- * Add stylesheet to front header		
+ * Add stylesheets to front header		
  * @return text 
  */
 function ca_front_header() {
-  echo '<link href="' . osc_plugin_url(__FILE__) . 'css/front_styles.css" rel="stylesheet" type="text/css">' . PHP_EOL;
+	echo '<link href="' . osc_plugin_url(__FILE__) . 'css/front_styles.css" rel="stylesheet" type="text/css">' . PHP_EOL;
+	$theme = osc_theme();
+	if ($theme == 'bender') {
+		echo '<link href="' . osc_plugin_url(__FILE__) . 'css/bender.css" rel="stylesheet" type="text/css">' . PHP_EOL;
+		osc_enqueue_script('jquery-ui');
+	} else {
+		echo '<link href="' . osc_base_url(false) . 'oc-includes/osclass/gui/css/jquery-ui/jquery-ui-1.8.20.custom.css" rel="stylesheet" type="text/css">' . PHP_EOL;
+	}
 }
 
 /**
