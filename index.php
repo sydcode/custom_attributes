@@ -342,7 +342,7 @@ osc_add_hook(osc_plugin_path(__FILE__) . "_uninstall", 'ca_call_after_uninstall'
 osc_add_hook('item_form', 'ca_form');
 
 // Hook for processing new item
-osc_add_hook('item_form_post', 'ca_form_post');
+osc_add_hook('posted_item', 'ca_form_post');
 
 // Hook for showing extra fields in search form
 osc_add_hook('search_form', 'ca_search_form');
@@ -360,7 +360,7 @@ osc_add_hook('item_edit', 'ca_item_edit');
 osc_add_hook('delete_item', 'ca_delete_item');
 
 // Hook for processing attributes from admin form
-osc_add_hook('item_edit_post', 'ca_item_edit_post');
+osc_add_hook('edited_item', 'ca_item_edit_post');
 
 // Hook for adding links to admin menu
 osc_add_hook('admin_menu', 'ca_admin_menu');
