@@ -443,15 +443,17 @@ class Attributes extends DAO {
 	 * @param string $options	 
 	 * @param boolean $required
 	 * @param boolean $search
+	 * @param boolean $search_limits	 
 	 * @return mixed
 	 */
-	public function insertField($type, $label, $options = null, $required = false, $search = true) {
+	public function insertField($type, $label, $options = null, $required = false, $search = true, $search_limits = false) {
 		$args = array( 
 			's_type' => $type, 
 			's_label' => $label, 
 			's_options' => $options, 
 			'b_required' => $required, 
-			'b_search' => $search
+			'b_search' => $search,
+			'b_search_limits' => $search_limits			
 		);
 		$result = $this->dao->insert($this->getTable_Fields(), $args);
 		if ($result) {
@@ -504,11 +506,19 @@ class Attributes extends DAO {
 	 * @param string $options
 	 * @param boolean $required
 	 * @param boolean $search
+	 * @param boolean $search_limits	 
 	 * @return boolean	
 	 */
-	public function setField($field_id, $type, $label, $options = null, $required = false, $search = false) {	
+	public function setField($field_id, $type, $label, $options = null, $required = false, $search = false, $search_limits = false) {	
 		$where = array('pk_i_id' => $field_id);
-		$set = array('s_type' => $type, 's_label' => $label, 's_options' => $options, 'b_required' => $required, 'b_search' => $search);
+		$set = array(
+			's_type' => $type, 
+			's_label' => $label, 
+			's_options' => $options, 
+			'b_required' => $required, 
+			'b_search' => $search,
+			'b_search_limits' => $search_limits
+		);
 		return $this->_update($this->getTable_Fields(), $set, $where);
 	}		
 	

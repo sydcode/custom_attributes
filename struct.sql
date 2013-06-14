@@ -5,6 +5,7 @@ CREATE TABLE /*TABLE_PREFIX*/t_item_custom_attr_fields (
 	s_options VARCHAR(65535) NULL,
 	b_required BOOLEAN NULL,
 	b_search BOOLEAN NULL,
+	b_search_limits BOOLEAN NULL,	
 	i_order INT UNSIGNED NULL,
 	PRIMARY KEY (pk_i_id)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';

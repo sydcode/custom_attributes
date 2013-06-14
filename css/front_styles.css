@@ -71,3 +71,16 @@
 #custom_attributes .search_textarea {
 	width: 174px;
 }
+
+#custom_attributes .search_smalltext {
+	width: 48px;
+	margin: 0 0 0 5px;
+}
+
+#custom_attributes .search_limits {
+	overflow: hidden;
+}
+
+#custom_attributes .search_maximum {
+	margin-left: 10px;
+}

@@ -72,10 +72,6 @@
 	margin-left: 10px;
 }
 
-#custom_attributes .field_required {
-	margin-right: 25px;
-}
-
 #custom_attributes .checkbox_input,
 #custom_attributes #alpha_order, 
 #custom_attributes #custom_order {

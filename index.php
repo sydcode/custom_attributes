@@ -24,17 +24,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 define('PLUGIN_NAME', 'custom_attributes');
-define('DATABASE_VERSION', 1);
+define('DATABASE_VERSION', 3);
     
 // Load database class	
 require 'attributes.php';
 
 // Update database to latest version
 $version = osc_get_preference('database_version', PLUGIN_NAME);
-if (empty($version) || $version < DATABASE_VERSION) {
+if (empty($version) || $version != DATABASE_VERSION) {
 	$table_exists = Attributes::newInstance()->tableExists_Fields();
 	if ($table_exists) {
-		Attributes::newInstance()->import('custom_attributes/update.sql');
+		if ($version == 1) {
+			Attributes::newInstance()->import('custom_attributes/update.sql');
+		}
+		Attributes::newInstance()->import('custom_attributes/update2.sql');
 	} else {
 		Attributes::newInstance()->import('custom_attributes/struct.sql');
 	}

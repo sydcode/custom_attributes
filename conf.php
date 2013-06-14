@@ -11,7 +11,8 @@ if (!empty($action)) {
 				$options = Params::getParam('field_options');
 				$required = Params::getParam('field_required');
 				$search = Params::getParam('field_search');
-				$field_id = Attributes::newInstance()->insertField($type, $label, $options, $required, $search);
+				$search_limits = Params::getParam('field_search_limits');				
+				$field_id = Attributes::newInstance()->insertField($type, $label, $options, $required, $search, $search_limits);
 				if (!empty($group_id) && !empty($field_id)) {
 					Attributes::newInstance()->insertMeta($group_id, $field_id);
 				}
@@ -49,8 +50,9 @@ if (!empty($action)) {
 			$options = Params::getParam('edit_options');
 			$required = Params::getParam('edit_required');
 			$search = Params::getParam('edit_search');
+			$search_limits = Params::getParam('edit_search_limits');			
 			if (!empty($label)) {
-				Attributes::newInstance()->setField($field_id, $type, $label, $options, $required, $search);
+				Attributes::newInstance()->setField($field_id, $type, $label, $options, $required, $search, $search_limits);
 				osc_add_flash_ok_message( __('Attribute saved', PLUGIN_NAME), PLUGIN_NAME);
 			} else {
 				osc_add_flash_warning_message( __('Attribute label required', PLUGIN_NAME), PLUGIN_NAME);
@@ -121,8 +123,9 @@ foreach ($groups as $group) {
 					</select>
 				</p>
 				<p>
-					<label class='field_required'><input class='checkbox_input' type='checkbox' name='field_required' value='1' /><?php _e('Require', PLUGIN_NAME); ?></label>
-					<label><input class='checkbox_input' type='checkbox' name='field_search' value='1' checked='checked' /><?php _e('Search', PLUGIN_NAME); ?></label>
+					<label><input class='checkbox_input' type='checkbox' name='field_required' value='1' /><?php _e('Require', PLUGIN_NAME); ?><br /></label>
+					<label><input class='checkbox_input' type='checkbox' name='field_search' value='1' checked='checked' /><?php _e('Search', PLUGIN_NAME); ?><br /></label>
+					<label><input class='checkbox_input' type='checkbox' name='field_search_limits' value='1' /><?php _e('Search Limits', PLUGIN_NAME); ?><br /></label>
 				</p>
 				<p><button class='btn btn-mini' type='submit'><?php _e('Create', PLUGIN_NAME); ?></button></p>
 			</form>
@@ -164,6 +167,7 @@ foreach ($fields as $field) {
 	$options = $field['s_options'];
 	$required = $field['b_required'];
 	$search = $field['b_search'];
+	$search_limits = $field['b_search_limits'];	
 	$order = $field['i_order'];
 	$items = Attributes::newInstance()->getItems($field_id);
 ?>
@@ -182,7 +186,7 @@ foreach ($fields as $field) {
 								<input type='hidden' name='field_id' value='<?php echo $field_id; ?>' />								
 								<input type='hidden' name='group_id' value='<?php echo $group_id; ?>' />								
 								<li><input class='edit_label' type='text' name='edit_label' value='<?php echo $label; ?>' /></li>
-<?php if (!empty($options)) { ?>								
+<?php if ($type == 'radio' || $type == 'select') { ?>								
 								<li>
 									<input type='text' class='edit_options' name='edit_options' value='<?php echo $options; ?>' /><br />
 									<span class='options_text'><?php _e('Separate options with commas (eg. a, b, c).', PLUGIN_NAME); ?></span>
@@ -190,17 +194,18 @@ foreach ($fields as $field) {
 <?php } ?>
 								<li>
 									<select class='field_type' name='edit_type'>
-										<option value='text'<?php if ($type == 'text') echo " selected='selected'"; ?>><?php _e('Text', PLUGIN_NAME); ?></option>
-										<option value='date'<?php if ($type == 'date') echo " selected='selected'"; ?>><?php _e('Date', PLUGIN_NAME); ?></option>										
-										<option value='select'<?php if ($type == 'select') echo " selected='selected'"; ?>><?php _e('Select', PLUGIN_NAME); ?></option>
-										<option value='radio'<?php if ($type == 'radio') echo " selected='selected'"; ?>><?php _e('Radio', PLUGIN_NAME); ?></option>
 										<option value='checkbox'<?php if ($type == 'checkbox') echo " selected='selected'"; ?>><?php _e('Checkbox', PLUGIN_NAME); ?></option>
+										<option value='date'<?php if ($type == 'date') echo " selected='selected'"; ?>><?php _e('Date', PLUGIN_NAME); ?></option>										
+										<option value='radio'<?php if ($type == 'radio') echo " selected='selected'"; ?>><?php _e('Radio', PLUGIN_NAME); ?></option>
+										<option value='select'<?php if ($type == 'select') echo " selected='selected'"; ?>><?php _e('Select', PLUGIN_NAME); ?></option>
+										<option value='text'<?php if ($type == 'text') echo " selected='selected'"; ?>><?php _e('Text', PLUGIN_NAME); ?></option>
 										<option value='textarea'<?php if ($type == 'textarea') echo " selected='selected'"; ?>><?php _e('Text Area', PLUGIN_NAME); ?></option>										
 									</select>
 								</li>
 								<li>
-									<label class='field_required'><input class='checkbox_input' type='checkbox' name='edit_required' value='1'<?php if ($required) echo " checked='checked'"; ?> /><?php _e('Require', PLUGIN_NAME); ?></label>
-									<label><input class='checkbox_input' type='checkbox' name='edit_search' value='1'<?php if ($search) echo " checked='checked'"; ?> /><?php _e('Search', PLUGIN_NAME); ?></label>							
+									<label><input class='checkbox_input' type='checkbox' name='edit_required' value='1'<?php if ($required) echo " checked='checked'"; ?> /><?php _e('Require', PLUGIN_NAME); ?><br /></label>
+									<label><input class='checkbox_input' type='checkbox' name='edit_search' value='1'<?php if ($search) echo " checked='checked'"; ?> /><?php _e('Search', PLUGIN_NAME); ?><br /></label>
+									<label'><input class='checkbox_input' type='checkbox' name='edit_search_limits' value='1'<?php if ($search_limits) echo " checked='checked'"; ?> /><?php _e('Search Limits', PLUGIN_NAME); ?></label>						
 								</li>
 								<li><button class='btn btn-mini' type='submit'><?php _e('Save', PLUGIN_NAME); ?></button></li>
 							</form>

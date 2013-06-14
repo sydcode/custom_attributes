@@ -108,21 +108,21 @@ foreach ($values as $value) {
 							<input type='hidden' name='item_id' value='<?php echo $item_id; ?>' />	
 							<input type='hidden' name='field_id' value='<?php echo $field_id; ?>' />	
 							<li>
-<?php if ($type == 'text') { ?>
-								<input id='<?php echo $name; ?>'<?php echo $class; ?> type='text' name='item_value' value='<?php echo $value; ?>' />
-<?php } else if ($type == 'checkbox') {  ?>
+<?php if ($type == 'checkbox') {  ?>
 <?php 	$checked = ($value == 'checked') ? " checked='checked'" : ''; ?>
 								<label>
 								<input class='edit_checkbox' type='checkbox' name='item_value' value='checked'<?php echo $checked; ?> />
 								<?php _e('Tick for "Yes"', PLUGIN_NAME); ?></label>
 <?php } elseif ($type == 'date') { ?>	
 								<input id='<?php echo $name; ?>' class='edit_date' type='text' name='item_value' value='<?php echo $value; ?>' />
-<?php } else if ($type == 'select') { ?>		
+<?php } elseif ($type == 'radio') { ?>						
+								<?php ca_radio_buttons($field_id, 'item_value', $value, $required); ?>								
+<?php } elseif ($type == 'select') { ?>		
 								<select name='item_value'>
 									<?php ca_select_options($field_id, $value); ?>
 								</select>
-<?php } else if ($type == 'radio') { ?>						
-								<?php ca_radio_buttons($field_id, 'item_value', $value, $required); ?>
+<?php } elseif ($type == 'text') { ?>
+								<input id='<?php echo $name; ?>' type='text' name='item_value' value='<?php echo $value; ?>' />
 <?php } elseif ($type == 'textarea') {  ?>
 								<textarea id='<?php echo $name; ?>' name='item_value'><?php echo $value; ?></textarea>											
 <?php } ?>							
