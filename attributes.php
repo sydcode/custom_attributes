@@ -53,8 +53,7 @@ class Attributes extends DAO {
 				case 0: 
 					// New installation
 					if ($table_exists) {
-						error_log('Install failed! Custom Attributes table already exists.', 0);
-						return false;
+						$this->import('custom_attributes/sql/update0.sql');
 					} else {
 						$this->import('custom_attributes/sql/struct.sql');
 					}
