@@ -143,14 +143,28 @@ function ca_search_conditions($params = null) {
 	}
 	$values_table = Attributes::newInstance()->getTable_Values();
 	foreach($params as $key => $value) {
-		$field_id = str_replace('field_', '', $key);
+		$has_min = strpos($key, 'min_');
+		$has_max = strpos($key, 'max_');
+		if ($has_min === 0) {
+			$field_id = str_replace('min_field_', '', $key);
+		} elseif ($has_max === 0) {
+			$field_id = str_replace('max_field_', '', $key);
+		} else {
+			$field_id = str_replace('field_', '', $key);
+		}
 		$field_type = Attributes::newInstance()->getFieldType($field_id);
 		if ($field_id == $key || empty($value)) continue;
 		$subquery = "SELECT fk_i_item_id FROM " . $values_table . " WHERE fk_i_field_id = " . $field_id;
-		if ($field_type == 'text' || $field_type == 'textarea') {
-			$subquery .= " AND s_value LIKE '%" . $value . "%'";
+		if ($has_min === 0 && $field_type == 'text') {
+			$subquery .= " AND CAST(s_value AS DECIMAL) >= " . $value;
+		} elseif ($has_max === 0 && $field_type == 'text') {
+			$subquery .= " AND CAST(s_value AS DECIMAL) <= " . $value;
 		} else {
-			$subquery .= " AND s_value = '" . $value . "'";
+			if ($field_type == 'text' || $field_type == 'textarea') {
+				$subquery .= " AND s_value LIKE '%" . $value . "%'";
+			} else {
+				$subquery .= " AND s_value = '" . $value . "'";
+			}
 		}
 		Search::newInstance()->addConditions("pk_i_id IN (" . $subquery. ")");
 	}	
