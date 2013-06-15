@@ -1,3 +1,7 @@
+ALTER TABLE /*TABLE_PREFIX*/t_item_custom_attr_fields ADD COLUMN s_steps INT(10) UNSIGNED NULL AFTER s_options;
+ALTER TABLE /*TABLE_PREFIX*/t_item_custom_attr_fields ADD COLUMN b_range BOOLEAN NULL AFTER s_options;
+ALTER TABLE /*TABLE_PREFIX*/t_item_custom_attr_fields ADD COLUMN b_search_limits BOOLEAN NULL AFTER b_search;
+
 CREATE TABLE /*TABLE_PREFIX*/t_item_custom_attr_groups (
 	pk_i_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	s_name VARCHAR(255) NULL,
@@ -21,4 +25,3 @@ CREATE TABLE /*TABLE_PREFIX*/t_item_custom_attr_meta (
 	FOREIGN KEY (fk_i_group_id) REFERENCES /*TABLE_PREFIX*/t_item_custom_attr_groups (pk_i_id),
 	FOREIGN KEY (fk_i_field_id) REFERENCES /*TABLE_PREFIX*/t_item_custom_attr_fields (pk_i_id)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET 'UTF8' COLLATE 'UTF8_GENERAL_CI';
-

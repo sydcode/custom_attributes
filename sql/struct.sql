@@ -3,6 +3,8 @@ CREATE TABLE /*TABLE_PREFIX*/t_item_custom_attr_fields (
 	s_type VARCHAR(10) NULL,
 	s_label VARCHAR(255) NULL,
 	s_options VARCHAR(65535) NULL,
+	b_range BOOLEAN NULL,
+	s_steps INT(10) UNSIGNED NULL,	
 	b_required BOOLEAN NULL,
 	b_search BOOLEAN NULL,
 	b_search_limits BOOLEAN NULL,	

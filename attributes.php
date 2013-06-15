@@ -17,6 +17,7 @@ class Attributes extends DAO {
 	 * @var Attributes
 	 */
 	private static $instance;
+	const CA_DATABASE_VERSION = '3';
 
 	/**
 	 * It creates a new Attributes object class ir if it has been created
@@ -39,6 +40,49 @@ class Attributes extends DAO {
 	function __construct() {
 		parent::__construct();
 	}
+	
+	/**
+	 * Update database to latest version
+	 * @return boolean (true|false)
+	 */
+	public function updateDatabase() {
+		$version = osc_get_preference('database_version', CA_PLUGIN_NAME);
+		if (empty($version) || $version != self::CA_DATABASE_VERSION) {
+			$table_exists = $this->tableExists_Fields();
+			switch ($version) {
+				case 0: 
+					// New installation
+					if ($table_exists) {
+						error_log('Install failed! Custom Attributes table already exists.', 0);
+						return false;
+					} else {
+						$this->import('custom_attributes/sql/struct.sql');
+					}
+					break;
+				case 1:
+					// Update from version 1
+					if ($table_exists) {
+						$this->import('custom_attributes/sql/update1.sql');
+					} else {
+						error_log('Upgrade failed! Custom Attributes table does not exist.', 0);
+						return false;
+					}
+					break;
+				case 2:
+					// Update from version 2
+					if ($table_exists) {
+						$this->import('custom_attributes/sql/update2.sql');
+					} else {
+						error_log('Upgrade failed! Custom Attributes table does not exist.', 0);
+						return false;
+					}
+					break;
+			}		
+			osc_set_preference('database_version', self::CA_DATABASE_VERSION, CA_PLUGIN_NAME, 'INTEGER');
+			osc_reset_preferences();
+		}
+		return true;
+	}	
 	
 	/**
 	 * Get name of table storing group categories

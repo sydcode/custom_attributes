@@ -24,36 +24,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 define('CA_PLUGIN_NAME', 'custom_attributes');
-define('CA_DATABASE_VERSION', 3);
-    
-// Load database class	
-require 'attributes.php';
 
-// Update database to latest version
-$version = osc_get_preference('CA_DATABASE_VERSION', CA_PLUGIN_NAME);
-if (empty($version) || $version != CA_DATABASE_VERSION) {
-	$table_exists = Attributes::newInstance()->tableExists_Fields();
-	if ($table_exists) {
-		if ($version == 1) {
-			Attributes::newInstance()->import('custom_attributes/sql/update.sql');
-		}
-		Attributes::newInstance()->import('custom_attributes/sql/update2.sql');
-	} else {
-		Attributes::newInstance()->import('custom_attributes/sql/struct.sql');
-	}
-	osc_set_preference('CA_DATABASE_VERSION', CA_DATABASE_VERSION, CA_PLUGIN_NAME, 'INTEGER');
-	osc_reset_preferences();
-}	
+// Load database class and check for updates
+require 'attributes.php';
+Attributes::newInstance()->updateDatabase();
 
 /**
  * Add table to database for storing attributes
  */
 function ca_call_after_install() {
-	$table_exists = Attributes::newInstance()->tableExists_Fields();
-	if ($table_exists) return;
-	Attributes::newInstance()->import('custom_attributes/sql/struct.sql');
-	osc_set_preference('CA_DATABASE_VERSION', CA_DATABASE_VERSION, CA_PLUGIN_NAME, 'INTEGER');
-	osc_reset_preferences();	
+	Attributes::newInstance()->updateDatabase();
 }
 
 /**
