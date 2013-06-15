@@ -35,11 +35,11 @@ if (empty($version) || $version != DATABASE_VERSION) {
 	$table_exists = Attributes::newInstance()->tableExists_Fields();
 	if ($table_exists) {
 		if ($version == 1) {
-			Attributes::newInstance()->import('custom_attributes/update.sql');
+			Attributes::newInstance()->import('custom_attributes/sql/update.sql');
 		}
-		Attributes::newInstance()->import('custom_attributes/update2.sql');
+		Attributes::newInstance()->import('custom_attributes/sql/update2.sql');
 	} else {
-		Attributes::newInstance()->import('custom_attributes/struct.sql');
+		Attributes::newInstance()->import('custom_attributes/sql/struct.sql');
 	}
 	osc_set_preference('database_version', DATABASE_VERSION, PLUGIN_NAME, 'INTEGER');
 	osc_reset_preferences();
@@ -51,7 +51,7 @@ if (empty($version) || $version != DATABASE_VERSION) {
 function ca_call_after_install() {
 	$table_exists = Attributes::newInstance()->tableExists_Fields();
 	if ($table_exists) return;
-	Attributes::newInstance()->import('custom_attributes/struct.sql');
+	Attributes::newInstance()->import('custom_attributes/sql/struct.sql');
 	osc_set_preference('database_version', DATABASE_VERSION, PLUGIN_NAME, 'INTEGER');
 	osc_reset_preferences();	
 }
