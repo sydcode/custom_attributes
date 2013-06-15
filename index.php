@@ -50,7 +50,7 @@ function ca_call_after_uninstall() {
 	Attributes::newInstance()->uninstall();
 	osc_delete_preference('order_type', CA_PLUGIN_NAME);
 	osc_delete_preference('heading', CA_PLUGIN_NAME);
-	osc_delete_preference('CA_DATABASE_VERSION', CA_PLUGIN_NAME);
+	osc_delete_preference('database_version', CA_PLUGIN_NAME);
 	osc_reset_preferences();
 }
 
