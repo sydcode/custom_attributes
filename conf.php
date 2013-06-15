@@ -9,10 +9,12 @@ if (!empty($action)) {
 			if (!empty($label)) {
 				$type = Params::getParam('field_type');
 				$options = Params::getParam('field_options');
+				$range = Params::getParam('field_range');
+				$steps = Params::getParam('field_steps');
 				$required = Params::getParam('field_required');
 				$search = Params::getParam('field_search');
 				$search_limits = Params::getParam('field_search_limits');				
-				$field_id = Attributes::newInstance()->insertField($type, $label, $options, $required, $search, $search_limits);
+				$field_id = Attributes::newInstance()->insertField($type, $label, $options, $range, $steps, $required, $search, $search_limits);
 				if (!empty($group_id) && !empty($field_id)) {
 					Attributes::newInstance()->insertMeta($group_id, $field_id);
 				}
@@ -48,11 +50,13 @@ if (!empty($action)) {
 			$type = Params::getParam('edit_type');
 			$label = Params::getParam('edit_label');
 			$options = Params::getParam('edit_options');
+			$range = Params::getParam('edit_range');
+			$steps = Params::getParam('edit_steps');
 			$required = Params::getParam('edit_required');
 			$search = Params::getParam('edit_search');
 			$search_limits = Params::getParam('edit_search_limits');			
 			if (!empty($label)) {
-				Attributes::newInstance()->setField($field_id, $type, $label, $options, $required, $search, $search_limits);
+				Attributes::newInstance()->setField($field_id, $type, $label, $options, $range, $steps, $required, $search, $search_limits);
 				osc_add_flash_ok_message( __('Attribute saved', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 			} else {
 				osc_add_flash_warning_message( __('Attribute label required', CA_PLUGIN_NAME), CA_PLUGIN_NAME);

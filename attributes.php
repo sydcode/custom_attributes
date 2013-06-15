@@ -485,16 +485,20 @@ class Attributes extends DAO {
 	 * @param string $type
 	 * @param string $label
 	 * @param string $options	 
+	 * @param boolean $range
+	 * @param string $steps (for range)	 
 	 * @param boolean $required
 	 * @param boolean $search
 	 * @param boolean $search_limits	 
 	 * @return mixed
 	 */
-	public function insertField($type, $label, $options = null, $required = false, $search = true, $search_limits = false) {
+	public function insertField($type, $label, $options = null, $range = false, $steps = null, $required = false, $search = true, $search_limits = false) {
 		$args = array( 
 			's_type' => $type, 
 			's_label' => $label, 
 			's_options' => $options, 
+			'b_range' => $range,
+			's_steps' => $steps,
 			'b_required' => $required, 
 			'b_search' => $search,
 			'b_search_limits' => $search_limits			
@@ -548,17 +552,21 @@ class Attributes extends DAO {
 	 * @param int $field_id
 	 * @param string $label
 	 * @param string $options
+	 * @param boolean $range
+	 * @param string $steps (for range)	 	 
 	 * @param boolean $required
 	 * @param boolean $search
 	 * @param boolean $search_limits	 
 	 * @return boolean	
 	 */
-	public function setField($field_id, $type, $label, $options = null, $required = false, $search = false, $search_limits = false) {	
+	public function setField($field_id, $type, $label, $options = null, $range = false, $steps = null, $required = false, $search = false, $search_limits = false) {	
 		$where = array('pk_i_id' => $field_id);
 		$set = array(
 			's_type' => $type, 
 			's_label' => $label, 
 			's_options' => $options, 
+			'b_range' => $range,
+			's_steps' => $steps,			
 			'b_required' => $required, 
 			'b_search' => $search,
 			'b_search_limits' => $search_limits
