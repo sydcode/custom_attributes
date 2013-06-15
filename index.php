@@ -253,7 +253,7 @@ function ca_select_options($field_id, $value = null) {
  * @param int $value
  * @return text
  */
-function ca_radio_buttons($field_id, $name, $value = null, $required = null) {
+function ca_radio_buttons($field_id, $name, $value = null, $required = null, $search = false) {
 	$options = Attributes::newInstance()->getOptions($field_id, $value);
 	if (empty($options)) return;
 	if (empty($required)) {
@@ -262,6 +262,16 @@ function ca_radio_buttons($field_id, $name, $value = null, $required = null) {
 		$class = ' class="required"';
 	}	
 	$output = '';
+	if ($search) {
+		if ($value == null) {
+			$checked = " checked='checked'";
+		}	else {
+			$checked = '';
+		}
+		$output .= "<div><label class='radio_button_label'>";
+		$output .= "<input class='radio_button' type='radio' name='" . $name . "'" . $class . " value=''" . $checked . " />";
+		$output .= __('Unknown', PLUGIN_NAME) . "</label></div>" . PHP_EOL;	
+	}
 	$options = explode(',', $options);
 	foreach ($options as $option) {
 		$option = trim($option);
@@ -276,7 +286,6 @@ function ca_radio_buttons($field_id, $name, $value = null, $required = null) {
 	}
 	echo $output;
 }
-
 
 /**
  * Add links to admin menu	

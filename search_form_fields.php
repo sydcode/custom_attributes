@@ -28,7 +28,7 @@ foreach ($fields as $field) {
 <?php } elseif ($type == 'date') { ?>	
 				<input class='search_date' type='text' name='<?php echo $name; ?>' value='<?php echo $value; ?>' />	
 <?php } elseif ($type == 'radio') { ?>	
-				<?php ca_radio_buttons($id, $name, $value); ?>
+				<?php ca_radio_buttons($id, $name, $value, null, true); ?>
 <?php } elseif ($type == 'select') { ?>		
 				<select class='search_select' name='<?php echo $name; ?>'>
 					<?php ca_select_options($id, $value); ?>
