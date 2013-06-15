@@ -93,16 +93,19 @@ function ca_form($cat_id = null) {
 
 /**
  * Process attributes for new listing 
- * @param int $cat_id 
- * @param int $item_id  
+ * @param array $item 
  */
-function ca_form_post($cat_id = null, $item_id = null) {
-	if ($cat_id != null && $item_id != null) {
-		if (osc_is_this_category(PLUGIN_NAME, $cat_id)) {
-			$fields = Attributes::newInstance()->getCategoryFields($cat_id);
-			foreach ($fields as $field) {
-				$value = Params::getParam('field_' . $field['pk_i_id']);
-				Attributes::newInstance()->insertValue($item_id, $field['pk_i_id'], $value);
+function ca_form_post($item = null) {
+	if (!empty($item)) {
+		$item_id = $item['fk_i_item_id'];
+		$cat_id = $item['fk_i_category_id'];
+		if ($item_id != null && $cat_id != null) {
+			if (osc_is_this_category(PLUGIN_NAME, $cat_id)) {
+				$fields = Attributes::newInstance()->getCategoryFields($cat_id);
+				foreach ($fields as $field) {
+					$value = Params::getParam('field_' . $field['pk_i_id']);
+					Attributes::newInstance()->insertValue($item_id, $field['pk_i_id'], $value);
+				}
 			}
 		}
 	}
@@ -189,16 +192,19 @@ function ca_item_edit($cat_id = null, $item_id = null) {
 
 /**
  * Process attributes from edit page
- * @param int $cat_id 
- * @param int $item_id   
+ * @param array $item
  */
-function ca_item_edit_post($cat_id = null, $item_id = null) {
-	if ($cat_id != null && $item_id != null) {
-		if( osc_is_this_category(PLUGIN_NAME, $cat_id)) {	
-			$fields = Attributes::newInstance()->getCategoryFields($cat_id);
-			foreach ($fields as $field) {
-				$value = Params::getParam('field_' . $field['pk_i_id']);
-				Attributes::newInstance()->setValue($item_id, $field['pk_i_id'], $value);
+function ca_item_edit_post($item = null) {
+	if (!empty($item)) {
+		$item_id = $item['fk_i_item_id'];
+		$cat_id = $item['fk_i_category_id'];
+		if ($item_id != null && $cat_id != null) {
+			if( osc_is_this_category(PLUGIN_NAME, $cat_id)) {	
+				$fields = Attributes::newInstance()->getCategoryFields($cat_id);
+				foreach ($fields as $field) {
+					$value = Params::getParam('field_' . $field['pk_i_id']);
+					Attributes::newInstance()->setValue($item_id, $field['pk_i_id'], $value);
+				}
 			}
 		}
 	}
