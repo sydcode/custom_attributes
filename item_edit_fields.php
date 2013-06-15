@@ -33,7 +33,7 @@ foreach ($fields as $field) {
 <?php 	$checked = ($value == 'checked') ? " checked='checked'" : ''; ?>
 					<label>
 						<input id='<?php echo $name; ?>' class='edit_checkbox' type='checkbox' name='<?php echo $name; ?>' value='checked'<?php echo $checked; ?> />
-						<?php _e('Tick for "Yes"', PLUGIN_NAME); ?>
+						<?php _e('Tick for "Yes"', CA_PLUGIN_NAME); ?>
 					</label>
 <?php } elseif ($type == 'date') { ?>	
 					<input id='<?php echo $name; ?>'<?php echo $class; ?> type='text' name='<?php echo $name; ?>' value='<?php echo $value; ?>' />
@@ -51,7 +51,7 @@ foreach ($fields as $field) {
 				</td>
 				<td>
 <?php if ($required) { ?>
-					<span class='required_input'><?php _e('Required', PLUGIN_NAME); ?></span>
+					<span class='required_input'><?php _e('Required', CA_PLUGIN_NAME); ?></span>
 <?php } ?>
 				</td>
 			</tr>

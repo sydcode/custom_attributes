@@ -24,7 +24,7 @@ foreach ($fields as $field) {
 <?php if ($type == 'checkbox') { ?>
 <?php   $checked = ($value == 'checked') ? " checked='checked'" : ''; ?>
 				<input class='search_checkbox' type='checkbox' id='<?php echo $name; ?>' name='<?php echo $name; ?>' value='checked'<?php echo $checked; ?> />
-				<label class='search_label' for='<?php echo $name; ?>'><?php _e('Check to show listings', PLUGIN_NAME); ?></label>
+				<label class='search_label' for='<?php echo $name; ?>'><?php _e('Check to show listings', CA_PLUGIN_NAME); ?></label>
 <?php } elseif ($type == 'date') { ?>	
 				<input class='search_date' type='text' name='<?php echo $name; ?>' value='<?php echo $value; ?>' />	
 <?php } elseif ($type == 'radio') { ?>	

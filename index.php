@@ -23,15 +23,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-define('PLUGIN_NAME', 'custom_attributes');
-define('DATABASE_VERSION', 3);
+define('CA_PLUGIN_NAME', 'custom_attributes');
+define('CA_DATABASE_VERSION', 3);
     
 // Load database class	
 require 'attributes.php';
 
 // Update database to latest version
-$version = osc_get_preference('database_version', PLUGIN_NAME);
-if (empty($version) || $version != DATABASE_VERSION) {
+$version = osc_get_preference('CA_DATABASE_VERSION', CA_PLUGIN_NAME);
+if (empty($version) || $version != CA_DATABASE_VERSION) {
 	$table_exists = Attributes::newInstance()->tableExists_Fields();
 	if ($table_exists) {
 		if ($version == 1) {
@@ -41,7 +41,7 @@ if (empty($version) || $version != DATABASE_VERSION) {
 	} else {
 		Attributes::newInstance()->import('custom_attributes/sql/struct.sql');
 	}
-	osc_set_preference('database_version', DATABASE_VERSION, PLUGIN_NAME, 'INTEGER');
+	osc_set_preference('CA_DATABASE_VERSION', CA_DATABASE_VERSION, CA_PLUGIN_NAME, 'INTEGER');
 	osc_reset_preferences();
 }	
 
@@ -52,7 +52,7 @@ function ca_call_after_install() {
 	$table_exists = Attributes::newInstance()->tableExists_Fields();
 	if ($table_exists) return;
 	Attributes::newInstance()->import('custom_attributes/sql/struct.sql');
-	osc_set_preference('database_version', DATABASE_VERSION, PLUGIN_NAME, 'INTEGER');
+	osc_set_preference('CA_DATABASE_VERSION', CA_DATABASE_VERSION, CA_PLUGIN_NAME, 'INTEGER');
 	osc_reset_preferences();	
 }
 
@@ -68,9 +68,9 @@ function ca_admin_configuration() {
  */
 function ca_call_after_uninstall() {
 	Attributes::newInstance()->uninstall();
-	osc_delete_preference('order_type', PLUGIN_NAME);
-	osc_delete_preference('heading', PLUGIN_NAME);
-	osc_delete_preference('database_version', PLUGIN_NAME);
+	osc_delete_preference('order_type', CA_PLUGIN_NAME);
+	osc_delete_preference('heading', CA_PLUGIN_NAME);
+	osc_delete_preference('CA_DATABASE_VERSION', CA_PLUGIN_NAME);
 	osc_reset_preferences();
 }
 
@@ -80,7 +80,7 @@ function ca_call_after_uninstall() {
  */
 function ca_form($cat_id = null) {
 	if ($cat_id != null) {
-		if(osc_is_this_category(PLUGIN_NAME, $cat_id)) {
+		if(osc_is_this_category(CA_PLUGIN_NAME, $cat_id)) {
 			$groups = Attributes::newInstance()->getGroups($cat_id);
 			$order_type = osc_get_preference('order_type');
 			$fields = Attributes::newInstance()->getFields(null, $order_type);				
@@ -100,7 +100,7 @@ function ca_form_post($item = null) {
 		$item_id = $item['fk_i_item_id'];
 		$cat_id = $item['fk_i_category_id'];
 		if ($item_id != null && $cat_id != null) {
-			if (osc_is_this_category(PLUGIN_NAME, $cat_id)) {
+			if (osc_is_this_category(CA_PLUGIN_NAME, $cat_id)) {
 				$fields = Attributes::newInstance()->getCategoryFields($cat_id);
 				foreach ($fields as $field) {
 					$value = Params::getParam('field_' . $field['pk_i_id']);
@@ -118,7 +118,7 @@ function ca_form_post($item = null) {
 function ca_search_form($cat_id = null) {
 	if($cat_id != null) {
 		foreach($cat_id as $id) {
-			if(osc_is_this_category(PLUGIN_NAME, $id)) {
+			if(osc_is_this_category(CA_PLUGIN_NAME, $id)) {
 				$groups = Attributes::newInstance()->getGroups($id);
 				$order_type = osc_get_preference('order_type');
 				$fields = Attributes::newInstance()->getFields(null, $order_type);
@@ -175,7 +175,7 @@ function ca_search_conditions($params = null) {
  */
 function ca_item_detail() {
 	$cat_id = osc_item_category_id();
-	if (osc_is_this_category(PLUGIN_NAME, $cat_id)) {
+	if (osc_is_this_category(CA_PLUGIN_NAME, $cat_id)) {
 		$item_id = osc_item_id();
 	  $groups = Attributes::newInstance()->getGroups($cat_id);
 		$order_type = osc_get_preference('order_type');
@@ -193,7 +193,7 @@ function ca_item_detail() {
  */
 function ca_item_edit($cat_id = null, $item_id = null) {
 	if ($cat_id != null && $item_id != null) {
-		if (osc_is_this_category(PLUGIN_NAME, $cat_id)) {
+		if (osc_is_this_category(CA_PLUGIN_NAME, $cat_id)) {
 			$groups = Attributes::newInstance()->getGroups($cat_id);
 			$order_type = osc_get_preference('order_type');
 			$fields = Attributes::newInstance()->getFields(null, $order_type);				
@@ -213,7 +213,7 @@ function ca_item_edit_post($item = null) {
 		$item_id = $item['fk_i_item_id'];
 		$cat_id = $item['fk_i_category_id'];
 		if ($item_id != null && $cat_id != null) {
-			if( osc_is_this_category(PLUGIN_NAME, $cat_id)) {	
+			if( osc_is_this_category(CA_PLUGIN_NAME, $cat_id)) {	
 				$fields = Attributes::newInstance()->getCategoryFields($cat_id);
 				foreach ($fields as $field) {
 					$value = Params::getParam('field_' . $field['pk_i_id']);
@@ -234,7 +234,7 @@ function ca_select_options($field_id, $value = null) {
 	$options = Attributes::newInstance()->getOptions($field_id, $value);
 	if (empty($options)) return;
 	$options = explode(',', $options);
-	$output = "<option value=''>" . __('Select a value', PLUGIN_NAME) . "</option>" . PHP_EOL;
+	$output = "<option value=''>" . __('Select a value', CA_PLUGIN_NAME) . "</option>" . PHP_EOL;
 	foreach ($options as $option) {
 		$option = trim($option);
 		if ($value != null && $option == $value) {
@@ -270,7 +270,7 @@ function ca_radio_buttons($field_id, $name, $value = null, $required = null, $se
 		}
 		$output .= "<div><label class='radio_button_label'>";
 		$output .= "<input class='radio_button' type='radio' name='" . $name . "'" . $class . " value=''" . $checked . " />";
-		$output .= __('Unknown', PLUGIN_NAME) . "</label></div>" . PHP_EOL;	
+		$output .= __('Unknown', CA_PLUGIN_NAME) . "</label></div>" . PHP_EOL;	
 	}
 	$options = explode(',', $options);
 	foreach ($options as $option) {
@@ -292,12 +292,12 @@ function ca_radio_buttons($field_id, $name, $value = null, $required = null, $se
  * @return text
  */
 function ca_admin_menu() {
-	echo '<h3><a href="#">' . __('Custom Attributes', PLUGIN_NAME) . '</a></h3> 
+	echo '<h3><a href="#">' . __('Custom Attributes', CA_PLUGIN_NAME) . '</a></h3> 
 	<ul>
-		<li><a href="' . osc_admin_configure_plugin_url("custom_attributes/index.php") . '">&raquo; ' . __('Configure Plugin', PLUGIN_NAME) . '</a></li>
-		<li><a href="' . osc_admin_render_plugin_url("custom_attributes/conf_groups.php") . '">&raquo; ' . __('Edit Groups', PLUGIN_NAME) . '</a></li>
-		<li><a href="' . osc_admin_render_plugin_url("custom_attributes/conf.php") . '">&raquo; ' . __('Edit Attributes', PLUGIN_NAME) . '</a></li>
-		<li><a href="' . osc_admin_render_plugin_url("custom_attributes/conf_values.php") . '">&raquo; ' . __('Edit Values', PLUGIN_NAME) . '</a></li>
+		<li><a href="' . osc_admin_configure_plugin_url("custom_attributes/index.php") . '">&raquo; ' . __('Configure Plugin', CA_PLUGIN_NAME) . '</a></li>
+		<li><a href="' . osc_admin_render_plugin_url("custom_attributes/conf_groups.php") . '">&raquo; ' . __('Edit Groups', CA_PLUGIN_NAME) . '</a></li>
+		<li><a href="' . osc_admin_render_plugin_url("custom_attributes/conf.php") . '">&raquo; ' . __('Edit Attributes', CA_PLUGIN_NAME) . '</a></li>
+		<li><a href="' . osc_admin_render_plugin_url("custom_attributes/conf_values.php") . '">&raquo; ' . __('Edit Values', CA_PLUGIN_NAME) . '</a></li>
 	</ul>';
 }
 

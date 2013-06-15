@@ -245,7 +245,7 @@ class Attributes extends DAO {
 	 */
 	public function getFields($group_id = null, $order_type = null) {
 		if (empty($order_type)) {
-			$order_type = osc_get_preference('order_type', PLUGIN_NAME); 
+			$order_type = osc_get_preference('order_type', CA_PLUGIN_NAME); 
 		}
 		if (empty($group_id)) {
 			$this->dao->select('fk_i_field_id');

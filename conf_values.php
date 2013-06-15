@@ -10,26 +10,26 @@ if (!empty($action)) {
 		$item_id = Params::getParam('item_id');
 		$value = Params::getParam('item_value');
 		Attributes::newInstance()->setValue($item_id, $field_id, $value);
-		osc_add_flash_ok_message( __('Value saved', PLUGIN_NAME), PLUGIN_NAME);
+		osc_add_flash_ok_message( __('Value saved', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 	}
 	$values = Attributes::newInstance()->getItems($field_id);
 }
 ?>
 <script type='text/javascript' src='<?php echo osc_plugin_url(__FILE__); ?>js/values.js'></script>
-<?php osc_show_flash_message(PLUGIN_NAME); ?>
+<?php osc_show_flash_message(CA_PLUGIN_NAME); ?>
 <div id='custom_attributes'>
-	<h2 class='render-title heading'><?php _e('Custom Attributes', PLUGIN_NAME); ?></h2>
+	<h2 class='render-title heading'><?php _e('Custom Attributes', CA_PLUGIN_NAME); ?></h2>
 	<div class='config_column'>
 <?php	if (count($groups) > 0) { ?>
 		<div class='select_group'>
-			<h2 class='render-title sub_heading'><?php _e('Select Group', PLUGIN_NAME); ?></h2>
+			<h2 class='render-title sub_heading'><?php _e('Select Group', CA_PLUGIN_NAME); ?></h2>
 			<form method='post' action='<?php echo osc_admin_base_url(true); ?>'>
 				<input type='hidden' name='page' value='plugins' />
 				<input type='hidden' name='action' value='renderplugin' />
 				<input type='hidden' name='file' value='<?php echo osc_plugin_folder(__FILE__); ?>conf_values.php' />
 				<input type='hidden' name='plugin_action' value='select_group' />	
 				<select name='group_id'>
-					<option class='select_option' value=''><?php _e('Select a group', PLUGIN_NAME); ?></option>
+					<option class='select_option' value=''><?php _e('Select a group', CA_PLUGIN_NAME); ?></option>
 <?php
 $selected_id = Params::getParam('group_id');
 foreach ($groups as $group) {
@@ -44,14 +44,14 @@ foreach ($groups as $group) {
 					<option value='<?php echo $id; ?>'<?php echo $selected; ?>><?php echo $name; ?></option>
 <?php	}	?>
 				</select>
-				<p><button class='btn btn-mini' type='submit'><?php _e('Edit', PLUGIN_NAME); ?></button></p>
+				<p><button class='btn btn-mini' type='submit'><?php _e('Edit', CA_PLUGIN_NAME); ?></button></p>
 			</form>
 		</div>	
 <?php } ?>		
 		<div>
-			<h2 class='render-title sub_heading'><?php _e('Select Attribute', PLUGIN_NAME); ?></h2>
+			<h2 class='render-title sub_heading'><?php _e('Select Attribute', CA_PLUGIN_NAME); ?></h2>
 <?php	if (count($fields) == 0) { ?>
-			<p><?php _e('There are no attributes.', PLUGIN_NAME); ?></p>
+			<p><?php _e('There are no attributes.', CA_PLUGIN_NAME); ?></p>
 <?php } else { ?>
 			<form method='post' action='<?php echo osc_admin_base_url(true); ?>'>
 				<input type='hidden' name='page' value='plugins' />
@@ -60,7 +60,7 @@ foreach ($groups as $group) {
 				<input type='hidden' name='plugin_action' value='edit_attribute' />	
 				<input type='hidden' name='group_id' value='<?php echo $group_id; ?>' />
 				<select name='field_id'>
-					<option class='select_option' value=''><?php _e('Select an attribute', PLUGIN_NAME); ?></option>
+					<option class='select_option' value=''><?php _e('Select an attribute', CA_PLUGIN_NAME); ?></option>
 <?php
 $selected_id = Params::getParam('field_id');
 foreach ($fields as $field) {
@@ -75,14 +75,14 @@ foreach ($fields as $field) {
 					<option value='<?php echo $field_id; ?>'<?php echo $selected; ?>><?php echo $label; ?></option>
 <?php	}	?>
 				</select>
-				<p><button class='btn btn-mini' type='submit'><?php _e('Edit', PLUGIN_NAME); ?></button></p>
+				<p><button class='btn btn-mini' type='submit'><?php _e('Edit', CA_PLUGIN_NAME); ?></button></p>
 			</form>
 		</div>
 <?php } ?>			
 	</div>
 <?php if (!empty($values)) { ?>
 	<div class='config_column'>
-		<h2 class='render-title sub_heading'><?php _e('Edit Values', PLUGIN_NAME); ?></h2>
+		<h2 class='render-title sub_heading'><?php _e('Edit Values', CA_PLUGIN_NAME); ?></h2>
 		<div class='list-categories'>
 			<ul class='value_list'>
 <?php
@@ -112,7 +112,7 @@ foreach ($values as $value) {
 <?php 	$checked = ($value == 'checked') ? " checked='checked'" : ''; ?>
 								<label>
 								<input class='edit_checkbox' type='checkbox' name='item_value' value='checked'<?php echo $checked; ?> />
-								<?php _e('Tick for "Yes"', PLUGIN_NAME); ?></label>
+								<?php _e('Tick for "Yes"', CA_PLUGIN_NAME); ?></label>
 <?php } elseif ($type == 'date') { ?>	
 								<input id='<?php echo $name; ?>' class='edit_date' type='text' name='item_value' value='<?php echo $value; ?>' />
 <?php } elseif ($type == 'radio') { ?>						
@@ -127,7 +127,7 @@ foreach ($values as $value) {
 								<textarea id='<?php echo $name; ?>' name='item_value'><?php echo $value; ?></textarea>											
 <?php } ?>							
 							</li>
-							<li><button class='btn btn-mini' type='submit'><?php _e('Save', PLUGIN_NAME); ?></button></li>
+							<li><button class='btn btn-mini' type='submit'><?php _e('Save', CA_PLUGIN_NAME); ?></button></li>
 						</form>							
 					</ul>		
 				</li>

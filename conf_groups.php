@@ -12,31 +12,31 @@ if (!empty($action)) {
 					Attributes::newInstance()->insertGroup($name);
 					$group_id = Attributes::newInstance()->getGroupID($name);
 					Params::setParam('group_id', $group_id);
-					osc_add_flash_ok_message( __('Group created.', PLUGIN_NAME), PLUGIN_NAME);
+					osc_add_flash_ok_message( __('Group created.', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 				} else {
-					osc_add_flash_warning_message( __('That group already exists, please choose another name.', PLUGIN_NAME), PLUGIN_NAME);
+					osc_add_flash_warning_message( __('That group already exists, please choose another name.', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 				}
 			}
 			break;
 		case('delete_group'): 
 			Attributes::newInstance()->deleteGroup($group_id);
 			unset($group_id);
-			osc_add_flash_ok_message( __('Group deleted.', PLUGIN_NAME), PLUGIN_NAME);
+			osc_add_flash_ok_message( __('Group deleted.', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 			break;
 		case('update_name'): 
 			$name = Params::getParam('group_name');
 			Attributes::newInstance()->setGroupName($group_id, $name);
-			osc_add_flash_ok_message( __('Name updated.', PLUGIN_NAME), PLUGIN_NAME);
+			osc_add_flash_ok_message( __('Name updated.', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 			break;		
 		case('update_heading'): 
 			$heading = Params::getParam('group_heading');
 			Attributes::newInstance()->setGroupHeading($group_id, $heading);
-			osc_add_flash_ok_message( __('Heading updated.', PLUGIN_NAME), PLUGIN_NAME);
+			osc_add_flash_ok_message( __('Heading updated.', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 			break;
 		case('update_categories'): 
 			$categories = Params::getParam('categories');
 			Attributes::newInstance()->setGroupCategories($group_id, $categories);
-			osc_add_flash_ok_message( __('Categories updated.', PLUGIN_NAME), PLUGIN_NAME);
+			osc_add_flash_ok_message( __('Categories updated.', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 			break;			
 	}
 }
@@ -52,48 +52,48 @@ foreach ($groups as $group) {
 ?>
 <script type='text/javascript' src='<?php echo osc_assets_url('js/jquery.treeview.js'); ?>'></script>
 <script type='text/javascript' src='<?php echo osc_plugin_url(__FILE__); ?>js/groups.js'></script>
-<?php osc_show_flash_message(PLUGIN_NAME);  ?>
+<?php osc_show_flash_message(CA_PLUGIN_NAME);  ?>
 <div id='custom_attributes'>
-	<h2 class='render-title heading'><?php _e('Custom Attributes', PLUGIN_NAME); ?></h2>
+	<h2 class='render-title heading'><?php _e('Custom Attributes', CA_PLUGIN_NAME); ?></h2>
 	<div class='config_column'>
 		<div class='create_group'>
-			<h2 class='render-title sub_heading'><?php _e('Create Group', PLUGIN_NAME); ?></h2>
+			<h2 class='render-title sub_heading'><?php _e('Create Group', CA_PLUGIN_NAME); ?></h2>
 			<form method='post' action='<?php echo osc_admin_base_url(true);?>'>
 				<input type='hidden' name='page' value='plugins' />
 				<input type='hidden' name='action' value='renderplugin' />
 				<input type='hidden' name='file' value='<?php echo osc_plugin_folder(__FILE__); ?>conf_groups.php' />
 				<input type='hidden' name='plugin_action' value='create_group' />		
 				<input class='group_input' type='text' name='group_name' value='' />
-				<p><button class='btn btn-mini' type='submit'><?php _e('Create', PLUGIN_NAME); ?></button></p>
+				<p><button class='btn btn-mini' type='submit'><?php _e('Create', CA_PLUGIN_NAME); ?></button></p>
 			</form>
 		</div>
 <?php	if (!empty($group_options)) { ?>
 		<div class='edit_group'>
-			<h2 class='render-title sub_heading'><?php _e('Edit Group', PLUGIN_NAME); ?></h2>
+			<h2 class='render-title sub_heading'><?php _e('Edit Group', CA_PLUGIN_NAME); ?></h2>
 			<form method='post' action='<?php echo osc_admin_base_url(true); ?>'>
 				<input type='hidden' name='page' value='plugins' />
 				<input type='hidden' name='action' value='renderplugin' />
 				<input type='hidden' name='file' value='<?php echo osc_plugin_folder(__FILE__); ?>conf_groups.php' />
 				<input type='hidden' name='plugin_action' value='edit_group' />
 				<select name='group_id'>
-					<option class='select_option' value=''><?php _e('Select a group', PLUGIN_NAME); ?></option>
+					<option class='select_option' value=''><?php _e('Select a group', CA_PLUGIN_NAME); ?></option>
 					<?php echo $group_options; ?>
 				</select>
-				<p><button class='btn btn-mini' type='submit'><?php _e('Edit', PLUGIN_NAME); ?></button></p>
+				<p><button class='btn btn-mini' type='submit'><?php _e('Edit', CA_PLUGIN_NAME); ?></button></p>
 			</form>
 		</div>	
 		<div class='delete_group'>
-			<h2 class='render-title sub_heading'><?php _e('Delete Group', PLUGIN_NAME); ?></h2>
+			<h2 class='render-title sub_heading'><?php _e('Delete Group', CA_PLUGIN_NAME); ?></h2>
 			<form method='post' action='<?php echo osc_admin_base_url(true); ?>'>
 				<input type='hidden' name='page' value='plugins' />
 				<input type='hidden' name='action' value='renderplugin' />
 				<input type='hidden' name='file' value='<?php echo osc_plugin_folder(__FILE__); ?>conf_groups.php' />
 				<input type='hidden' name='plugin_action' value='delete_group' />	
 				<select name='group_id'>
-					<option class='select_option' value=''><?php _e('Select a group', PLUGIN_NAME); ?></option>
+					<option class='select_option' value=''><?php _e('Select a group', CA_PLUGIN_NAME); ?></option>
 					<?php echo $group_options; ?>
 				</select>
-				<p><button class='btn btn-mini' type='submit'><?php _e('Delete', PLUGIN_NAME); ?></button></p>
+				<p><button class='btn btn-mini' type='submit'><?php _e('Delete', CA_PLUGIN_NAME); ?></button></p>
 			</form>
 		</div>
 <?php } ?>		
@@ -107,7 +107,7 @@ if (!empty($group_id)) {
 ?>
 	<div class='config_column'>
 		<div class='group_name'>
-			<h2 class='render-title sub_heading'><?php _e('Name', PLUGIN_NAME); ?></h2>
+			<h2 class='render-title sub_heading'><?php _e('Name', CA_PLUGIN_NAME); ?></h2>
 			<form method='post' method='post' method='post' action='<?php echo osc_admin_base_url(true); ?>'>
 				<input type='hidden' name='page' value='plugins' />
 				<input type='hidden' name='action' value='renderplugin' />
@@ -115,11 +115,11 @@ if (!empty($group_id)) {
 				<input type='hidden' name='plugin_action' value='update_name' />	
 				<input type='hidden' name='group_id' value='<?php echo $group_id; ?>' />	
 				<input class='group_input' type='text' name='group_name' value='<?php echo $group_name; ?>' />
-				<p><button class='btn btn-mini' type='submit'><?php _e('Update', PLUGIN_NAME); ?></button></p>
+				<p><button class='btn btn-mini' type='submit'><?php _e('Update', CA_PLUGIN_NAME); ?></button></p>
 			</form>		
 		</div>
 		<div class='group_heading'>
-			<h2 class='render-title sub_heading'><?php _e('Heading', PLUGIN_NAME); ?></h2>
+			<h2 class='render-title sub_heading'><?php _e('Heading', CA_PLUGIN_NAME); ?></h2>
 			<form method='post' action='<?php echo osc_admin_base_url(true); ?>'>
 				<input type='hidden' name='page' value='plugins' />
 				<input type='hidden' name='action' value='renderplugin' />
@@ -127,11 +127,11 @@ if (!empty($group_id)) {
 				<input type='hidden' name='plugin_action' value='update_heading' />	
 				<input type='hidden' name='group_id' value='<?php echo $group_id; ?>' />	
 				<input class='group_input' type='text' name='group_heading' value='<?php echo $group_heading; ?>' />
-				<p><button class='btn btn-mini' type='submit'><?php _e('Update', PLUGIN_NAME); ?></button></p>
+				<p><button class='btn btn-mini' type='submit'><?php _e('Update', CA_PLUGIN_NAME); ?></button></p>
 			</form>		
 		</div>
 		<div class='group_categories'>
-			<h2 class='render-title sub_heading'><?php _e('Categories', PLUGIN_NAME); ?></h2>
+			<h2 class='render-title sub_heading'><?php _e('Categories', CA_PLUGIN_NAME); ?></h2>
 			<form method='post' method='post' action='<?php echo osc_admin_base_url(true); ?>'>
 				<input type='hidden' name='page' value='plugins' />
 				<input type='hidden' name='action' value='renderplugin' />
@@ -147,7 +147,7 @@ if (!empty($group_id)) {
 						<?php CategoryForm::categories_tree($categories, $selected); ?>
 					</ul>
 				</p>
-				<p><button class='btn btn-mini' type='submit'><?php _e('Update', PLUGIN_NAME); ?></button></p>
+				<p><button class='btn btn-mini' type='submit'><?php _e('Update', CA_PLUGIN_NAME); ?></button></p>
 			</form>		
 		</div>
 	</div>

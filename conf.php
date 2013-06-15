@@ -16,20 +16,20 @@ if (!empty($action)) {
 				if (!empty($group_id) && !empty($field_id)) {
 					Attributes::newInstance()->insertMeta($group_id, $field_id);
 				}
-				osc_add_flash_ok_message( __('Attribute added', PLUGIN_NAME), PLUGIN_NAME);
+				osc_add_flash_ok_message( __('Attribute added', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 			}
 			break;
 		case('delete_field'):
 			$attribute = Params::getParam('field_select');
 			if(!empty($attribute)) {
 				Attributes::newInstance()->deleteField($attribute);
-				osc_add_flash_ok_message( __('Attribute deleted', PLUGIN_NAME), PLUGIN_NAME);
+				osc_add_flash_ok_message( __('Attribute deleted', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 			}
 			break;
 		case('order_attributes'):
 			$order_type = Params::getParam('order_type');
 			if (empty($group_id)) {
-				osc_set_preference('order_type', $order_type, PLUGIN_NAME, 'STRING');
+				osc_set_preference('order_type', $order_type, CA_PLUGIN_NAME, 'STRING');
 				osc_reset_preferences();
 			} else {
 				Attributes::newInstance()->setGroupOrderType($group_id, $order_type);
@@ -41,7 +41,7 @@ if (!empty($action)) {
 					Attributes::newInstance()->setFieldOrder($field['pk_i_id'], intval($order));
 				}
 			}
-			osc_add_flash_ok_message( __('Attribute order saved', PLUGIN_NAME), PLUGIN_NAME);
+			osc_add_flash_ok_message( __('Attribute order saved', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 			break;
 		case('edit_attribute'):
 			$field_id = Params::getParam('field_id');
@@ -53,9 +53,9 @@ if (!empty($action)) {
 			$search_limits = Params::getParam('edit_search_limits');			
 			if (!empty($label)) {
 				Attributes::newInstance()->setField($field_id, $type, $label, $options, $required, $search, $search_limits);
-				osc_add_flash_ok_message( __('Attribute saved', PLUGIN_NAME), PLUGIN_NAME);
+				osc_add_flash_ok_message( __('Attribute saved', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 			} else {
-				osc_add_flash_warning_message( __('Attribute label required', PLUGIN_NAME), PLUGIN_NAME);
+				osc_add_flash_warning_message( __('Attribute label required', CA_PLUGIN_NAME), CA_PLUGIN_NAME);
 			}
 			break;
 	}
@@ -67,20 +67,20 @@ $groups = Attributes::newInstance()->getGroups();
 $fields = Attributes::newInstance()->getFields($group_id);
 ?>
 <script type='text/javascript' src='<?php echo osc_plugin_url(__FILE__); ?>js/attributes.js'></script>
-<?php osc_show_flash_message(PLUGIN_NAME); ?>
+<?php osc_show_flash_message(CA_PLUGIN_NAME); ?>
 <div id='custom_attributes'>
-	<h2 class='render-title heading'><?php _e('Custom Attributes', PLUGIN_NAME); ?></h2>
+	<h2 class='render-title heading'><?php _e('Custom Attributes', CA_PLUGIN_NAME); ?></h2>
 	<div class='config_column'>
 <?php	if (count($groups) > 0) { ?>
 		<div class='select_group'>
-			<h2 class='render-title sub_heading'><?php _e('Select Group', PLUGIN_NAME); ?></h2>
+			<h2 class='render-title sub_heading'><?php _e('Select Group', CA_PLUGIN_NAME); ?></h2>
 			<form method='post' action='<?php echo osc_admin_base_url(true); ?>'>
 				<input type='hidden' name='page' value='plugins' />
 				<input type='hidden' name='action' value='renderplugin' />
 				<input type='hidden' name='file' value='<?php echo osc_plugin_folder(__FILE__); ?>conf.php' />
 				<input type='hidden' name='plugin_action' value='select_group' />	
 				<select name='group_id'>
-					<option class='select_option' value=''><?php _e('Select a group', PLUGIN_NAME); ?></option>
+					<option class='select_option' value=''><?php _e('Select a group', CA_PLUGIN_NAME); ?></option>
 <?php
 $selected_id = Params::getParam('group_id');
 foreach ($groups as $group) {
@@ -95,12 +95,12 @@ foreach ($groups as $group) {
 					<option value='<?php echo $id; ?>'<?php echo $selected; ?>><?php echo $name; ?></option>
 <?php	}	?>
 				</select>
-				<p><button class='btn btn-mini' type='submit'><?php _e('Edit', PLUGIN_NAME); ?></button></p>
+				<p><button class='btn btn-mini' type='submit'><?php _e('Edit', CA_PLUGIN_NAME); ?></button></p>
 			</form>
 		</div>	
 <?php } ?>		
 		<div class='add_attribute'>
-			<h2 class='render-title sub_heading'><?php _e('Add Attribute', PLUGIN_NAME); ?></h2>
+			<h2 class='render-title sub_heading'><?php _e('Add Attribute', CA_PLUGIN_NAME); ?></h2>
 			<form method='post' action='<?php echo osc_admin_base_url(true);?>'>
 				<input type='hidden' name='page' value='plugins' />
 				<input type='hidden' name='action' value='renderplugin' />
@@ -110,29 +110,29 @@ foreach ($groups as $group) {
 				<input class='text_input' type='text' name='field_label' value='' />
 				<p class='field_options'>
 					<input class='text_input' type='text' name='field_options' value='' />
-					<span class='options_text'><?php _e('Separate options with commas (eg. a, b, c).', PLUGIN_NAME); ?></span>
+					<span class='options_text'><?php _e('Separate options with commas (eg. a, b, c).', CA_PLUGIN_NAME); ?></span>
 				</p>
 				<p>
 					<select class='field_type' name='field_type'>
-						<option value='checkbox'><?php _e('Checkbox', PLUGIN_NAME); ?></option>
-						<option value='date'><?php _e('Date', PLUGIN_NAME); ?></option>
-						<option value='radio'><?php _e('Radio', PLUGIN_NAME); ?></option>
-						<option value='select'><?php _e('Select', PLUGIN_NAME); ?></option>
-						<option value='text'><?php _e('Text', PLUGIN_NAME); ?></option>
-						<option value='textarea'><?php _e('Text Area', PLUGIN_NAME); ?></option>							
+						<option value='checkbox'><?php _e('Checkbox', CA_PLUGIN_NAME); ?></option>
+						<option value='date'><?php _e('Date', CA_PLUGIN_NAME); ?></option>
+						<option value='radio'><?php _e('Radio', CA_PLUGIN_NAME); ?></option>
+						<option value='select'><?php _e('Select', CA_PLUGIN_NAME); ?></option>
+						<option value='text'><?php _e('Text', CA_PLUGIN_NAME); ?></option>
+						<option value='textarea'><?php _e('Text Area', CA_PLUGIN_NAME); ?></option>							
 					</select>
 				</p>
 				<p>
-					<label class='required'><input class='checkbox_input' type='checkbox' name='field_required' value='1' /><?php _e('Require', PLUGIN_NAME); ?><br /></label>
-					<label><input class='checkbox_input' type='checkbox' name='field_search' value='1' checked='checked' /><?php _e('Search', PLUGIN_NAME); ?><br /></label>
-					<label class='range'><input class='checkbox_input' type='checkbox' name='field_search_limits' value='1' /><?php _e('Search Limits', PLUGIN_NAME); ?><br /></label>
+					<label class='required'><input class='checkbox_input' type='checkbox' name='field_required' value='1' /><?php _e('Require', CA_PLUGIN_NAME); ?><br /></label>
+					<label><input class='checkbox_input' type='checkbox' name='field_search' value='1' checked='checked' /><?php _e('Search', CA_PLUGIN_NAME); ?><br /></label>
+					<label class='range'><input class='checkbox_input' type='checkbox' name='field_search_limits' value='1' /><?php _e('Search Limits', CA_PLUGIN_NAME); ?><br /></label>
 				</p>
-				<p><button class='btn btn-mini' type='submit'><?php _e('Create', PLUGIN_NAME); ?></button></p>
+				<p><button class='btn btn-mini' type='submit'><?php _e('Create', CA_PLUGIN_NAME); ?></button></p>
 			</form>
 		</div>
 <?php	if (count($fields) > 0) { ?>
 		<div class='delete_attribute'>
-			<h2 class='render-title sub_heading'><?php _e('Delete Attribute', PLUGIN_NAME); ?></h2>
+			<h2 class='render-title sub_heading'><?php _e('Delete Attribute', CA_PLUGIN_NAME); ?></h2>
 			<form method='post' action='<?php echo osc_admin_base_url(true); ?>'>
 				<input type='hidden' name='page' value='plugins' />
 				<input type='hidden' name='action' value='renderplugin' />
@@ -140,7 +140,7 @@ foreach ($groups as $group) {
 				<input type='hidden' name='plugin_action' value='delete_field' />
 				<input type='hidden' name='group_id' value='<?php echo $group_id; ?>' />				
 				<select name='field_select'>
-					<option class='select_option' value=''><?php _e('Select an attribute', PLUGIN_NAME); ?></option>
+					<option class='select_option' value=''><?php _e('Select an attribute', CA_PLUGIN_NAME); ?></option>
 <?php
 foreach ($fields as $field) {
 	$id = $field['pk_i_id'];
@@ -149,14 +149,14 @@ foreach ($fields as $field) {
 					<option value='<?php echo $id; ?>'><?php echo $label; ?></option>
 <?php	}	?>
 				</select>
-				<p><button class='btn btn-mini' type='submit'><?php _e('Delete', PLUGIN_NAME); ?></button></p>
+				<p><button class='btn btn-mini' type='submit'><?php _e('Delete', CA_PLUGIN_NAME); ?></button></p>
 			</form>
 		</div>
 <?php } ?>
 	</div>
 <?php	if (count($fields) > 0) { ?>
 	<div class='config_column'>
-		<h2 class='render-title sub_heading'><?php _e('Edit Attributes', PLUGIN_NAME); ?></h2>
+		<h2 class='render-title sub_heading'><?php _e('Edit Attributes', CA_PLUGIN_NAME); ?></h2>
 			<div class='list-categories'>
 				<ul class='attribute_list'>
 <?php
@@ -189,25 +189,25 @@ foreach ($fields as $field) {
 <?php if ($type == 'radio' || $type == 'select') { ?>								
 								<li>
 									<input type='text' class='edit_options' name='edit_options' value='<?php echo $options; ?>' /><br />
-									<span class='options_text'><?php _e('Separate options with commas (eg. a, b, c).', PLUGIN_NAME); ?></span>
+									<span class='options_text'><?php _e('Separate options with commas (eg. a, b, c).', CA_PLUGIN_NAME); ?></span>
 								</li>
 <?php } ?>
 								<li>
 									<select class='field_type' name='edit_type'>
-										<option value='checkbox'<?php if ($type == 'checkbox') echo " selected='selected'"; ?>><?php _e('Checkbox', PLUGIN_NAME); ?></option>
-										<option value='date'<?php if ($type == 'date') echo " selected='selected'"; ?>><?php _e('Date', PLUGIN_NAME); ?></option>										
-										<option value='radio'<?php if ($type == 'radio') echo " selected='selected'"; ?>><?php _e('Radio', PLUGIN_NAME); ?></option>
-										<option value='select'<?php if ($type == 'select') echo " selected='selected'"; ?>><?php _e('Select', PLUGIN_NAME); ?></option>
-										<option value='text'<?php if ($type == 'text') echo " selected='selected'"; ?>><?php _e('Text', PLUGIN_NAME); ?></option>
-										<option value='textarea'<?php if ($type == 'textarea') echo " selected='selected'"; ?>><?php _e('Text Area', PLUGIN_NAME); ?></option>										
+										<option value='checkbox'<?php if ($type == 'checkbox') echo " selected='selected'"; ?>><?php _e('Checkbox', CA_PLUGIN_NAME); ?></option>
+										<option value='date'<?php if ($type == 'date') echo " selected='selected'"; ?>><?php _e('Date', CA_PLUGIN_NAME); ?></option>										
+										<option value='radio'<?php if ($type == 'radio') echo " selected='selected'"; ?>><?php _e('Radio', CA_PLUGIN_NAME); ?></option>
+										<option value='select'<?php if ($type == 'select') echo " selected='selected'"; ?>><?php _e('Select', CA_PLUGIN_NAME); ?></option>
+										<option value='text'<?php if ($type == 'text') echo " selected='selected'"; ?>><?php _e('Text', CA_PLUGIN_NAME); ?></option>
+										<option value='textarea'<?php if ($type == 'textarea') echo " selected='selected'"; ?>><?php _e('Text Area', CA_PLUGIN_NAME); ?></option>										
 									</select>
 								</li>
 								<li>
-									<label class='required'><input class='checkbox_input' type='checkbox' name='edit_required' value='1'<?php if ($required) echo " checked='checked'"; ?> /><?php _e('Require', PLUGIN_NAME); ?><br /></label>
-									<label><input class='checkbox_input' type='checkbox' name='edit_search' value='1'<?php if ($search) echo " checked='checked'"; ?> /><?php _e('Search', PLUGIN_NAME); ?><br /></label>
-									<label class='range'><input class='checkbox_input' type='checkbox' name='edit_search_limits' value='1'<?php if ($search_limits) echo " checked='checked'"; ?> /><?php _e('Search Limits', PLUGIN_NAME); ?></label>						
+									<label class='required'><input class='checkbox_input' type='checkbox' name='edit_required' value='1'<?php if ($required) echo " checked='checked'"; ?> /><?php _e('Require', CA_PLUGIN_NAME); ?><br /></label>
+									<label><input class='checkbox_input' type='checkbox' name='edit_search' value='1'<?php if ($search) echo " checked='checked'"; ?> /><?php _e('Search', CA_PLUGIN_NAME); ?><br /></label>
+									<label class='range'><input class='checkbox_input' type='checkbox' name='edit_search_limits' value='1'<?php if ($search_limits) echo " checked='checked'"; ?> /><?php _e('Search Limits', CA_PLUGIN_NAME); ?></label>						
 								</li>
-								<li><button class='btn btn-mini' type='submit'><?php _e('Save', PLUGIN_NAME); ?></button></li>
+								<li><button class='btn btn-mini' type='submit'><?php _e('Save', CA_PLUGIN_NAME); ?></button></li>
 							</form>
 						</ul>
 					</li>
@@ -217,7 +217,7 @@ foreach ($fields as $field) {
 	</div>
 	<div class='config_column'>
 		<div>
-			<h2 class='render-title sub_heading'><?php _e('Order Attributes', PLUGIN_NAME); ?></h2>
+			<h2 class='render-title sub_heading'><?php _e('Order Attributes', CA_PLUGIN_NAME); ?></h2>
 			<form method='post' action='<?php echo osc_admin_base_url(true);?>'>
 				<input type='hidden' name='page' value='plugins' />
 				<input type='hidden' name='action' value='renderplugin' />
@@ -226,7 +226,7 @@ foreach ($fields as $field) {
 				<input type='hidden' name='group_id' value='<?php echo $group_id; ?>' />	
 <?php 
 if (empty($group_id)) {
-	$order_type = osc_get_preference('order_type', PLUGIN_NAME); 
+	$order_type = osc_get_preference('order_type', CA_PLUGIN_NAME); 
 } else {
 	$order_type = Attributes::newInstance()->getGroupOrderType($group_id);
 }
@@ -238,8 +238,8 @@ if ($order_type == 'custom') {
 	$custom_checked = '';
 }
 ?>
-				<label><input id='alpha_order' type='radio' name='order_type' value='alpha'<?php echo $alpha_checked; ?> /><?php _e('Alphabetical', PLUGIN_NAME); ?></label>
-				<label class='radio_label'><input id='custom_order' type='radio' name='order_type' value='custom'<?php echo $custom_checked; ?> /><?php _e('Custom', PLUGIN_NAME); ?></label>
+				<label><input id='alpha_order' type='radio' name='order_type' value='alpha'<?php echo $alpha_checked; ?> /><?php _e('Alphabetical', CA_PLUGIN_NAME); ?></label>
+				<label class='radio_label'><input id='custom_order' type='radio' name='order_type' value='custom'<?php echo $custom_checked; ?> /><?php _e('Custom', CA_PLUGIN_NAME); ?></label>
 				<div class='list-categories custom_order'>
 					<ul class='sortable ui-sortable'>
 <?php	
@@ -262,7 +262,7 @@ foreach ($custom_fields as $field) {
 <?php } ?>		
 					</ul>
 				</div>
-				<p><button class='btn btn-mini' type='submit'><?php _e('Save', PLUGIN_NAME); ?></button></p>
+				<p><button class='btn btn-mini' type='submit'><?php _e('Save', CA_PLUGIN_NAME); ?></button></p>
 			</form>
 		</div>	
 	</div>		
