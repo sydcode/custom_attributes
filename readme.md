@@ -23,6 +23,7 @@ Version 3.0 or greater
 ## Credits
 * [sharkey](http://forums.osclass.org/index.php?action=profile;u=11728), who hired me to build this plugin.
 * [Jay](https://github.com/trains58554), who has fixed many bugs.
+* [dienast](https://github.com/dienast), for his slider input.
 
 ## Author
 * [sydcode](https://github.com/sydcode)
