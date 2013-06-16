@@ -61,7 +61,13 @@ class Attributes extends DAO {
 				case 1:
 					// Update from version 1
 					if ($table_exists) {
-						$this->import('custom_attributes/sql/update1.sql');
+						// Check for first version of dienast's fork
+						$column_exists = $this->columnExists_Fields('b_range');
+						if ($column_exists) {
+							$this->import('custom_attributes/sql/update2.sql');
+						} else {
+							$this->import('custom_attributes/sql/update1.sql');
+						}
 					} else {
 						error_log('Upgrade failed! Custom Attributes table does not exist.', 0);
 						return false;
@@ -145,6 +151,24 @@ class Attributes extends DAO {
 		}
 	}
 	
+	/**
+	 * Check fields column exists
+	 */
+	public function columnExists_Fields($column) {
+		$sql = "
+			SELECT * FROM information_schema.COLUMNS 
+			WHERE TABLE_SCHEMA = DATABASE()
+			AND TABLE_NAME = '" . $this->getTable_Fields() . "'
+			AND COLUMN_NAME = '" . $column . "'
+		";
+		$result = $this->dao->query($sql);
+		$result = $result->result();
+		if (empty($result)) {
+			return false;
+		} else {
+			return true; 
+		}
+	}	
 	
 	/**
 	 * Get all attribute groups
