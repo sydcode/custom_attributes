@@ -119,12 +119,17 @@ foreach ($groups as $group) {
 				<p>
 					<select class='field_type' name='field_type'>
 						<option value='checkbox'><?php _e('Checkbox', CA_PLUGIN_NAME); ?></option>
-						<option value='date'><?php _e('Date', CA_PLUGIN_NAME); ?></option>
-						<option value='radio'><?php _e('Radio', CA_PLUGIN_NAME); ?></option>
-						<option value='select'><?php _e('Select', CA_PLUGIN_NAME); ?></option>
-						<option value='text'><?php _e('Text', CA_PLUGIN_NAME); ?></option>
-						<option value='textarea'><?php _e('Text Area', CA_PLUGIN_NAME); ?></option>							
-					</select>
+						<?php $selected = ($type == 'date') ? " selected='selected'" : ''; ?>								
+						<option value='date'<?php echo $selected; ?>><?php _e('Date', CA_PLUGIN_NAME); ?></option>
+						<?php $selected = ($type == 'radio') ? " selected='selected'" : ''; ?>	
+						<option value='radio'<?php echo $selected; ?>><?php _e('Radio', CA_PLUGIN_NAME); ?></option>
+						<?php $selected = ($type == 'select') ? " selected='selected'" : ''; ?>	
+						<option value='select'<?php echo $selected; ?>><?php _e('Select', CA_PLUGIN_NAME); ?></option>
+						<?php $selected = ($type == 'text') ? " selected='selected'" : ''; ?>	
+						<option value='text'<?php echo $selected; ?>><?php _e('Text', CA_PLUGIN_NAME); ?></option>
+						<?php $selected = ($type == 'textarea') ? " selected='selected'" : ''; ?>	
+						<option value='textarea'<?php echo $selected; ?>><?php _e('Text Area', CA_PLUGIN_NAME); ?></option>							
+					</select>						
 				</p>
 				<p>
 					<label class='required'><input class='checkbox_input' type='checkbox' name='field_required' value='1' /><?php _e('Require', CA_PLUGIN_NAME); ?><br /></label>
