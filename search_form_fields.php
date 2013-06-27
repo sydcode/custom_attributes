@@ -1,22 +1,23 @@
 <fieldset class='box show_only'>
 <?php 
 foreach ($fields as $field) { 
-	if ($field['b_search']) {
-		$id = $field['pk_i_id'];
-		$label = $field['s_label'];
-		$type = $field['s_type'];
-		$search_limits = $field['b_search_limits'];
-		if ($search_limits) {
-			$name_min = 'min_field_' . $id;
-			$name_max = 'max_field_' . $id;
-			$class = 'row two_input';
-			$value_min = Params::getParam($name_min);
-			$value_max = Params::getParam($name_max);
-		} else {
-			$name = 'field_' . $id;
-			$class = 'row one_input';
-			$value = Params::getParam($name);
-		}
+	if (empty($field['b_search'])) {
+		continue;
+	}
+	$id = $field['pk_i_id'];
+	$label = $field['s_label'];
+	$type = $field['s_type'];
+	$search_limits = $field['b_search_limits'];
+	if ($search_limits) {
+		$name_min = 'min_field_' . $id;
+		$name_max = 'max_field_' . $id;
+		$class = 'row two_input';
+		$value_min = Params::getParam($name_min);
+		$value_max = Params::getParam($name_max);
+	} else {
+		$name = 'field_' . $id;
+		$class = 'row one_input';
+		$value = Params::getParam($name);
 	}
 ?>
 	<div class='<?php echo $class; ?>'>
