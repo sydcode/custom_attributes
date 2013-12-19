@@ -153,3 +153,16 @@
 #custom_attributes #category_tree {
 	display: none;
 }
+
+#custom_attributes .settings .btn {
+	width: auto;
+}
+
+#custom_attributes .help {
+	margin-top: 25px;
+}
+
+#custom_attributes .code {
+	font-family: monospace;
+	font-size: 16px;
+}

@@ -1,3 +1,8 @@
+<?php
+if ( !defined('ABS_PATH') ) { 
+	exit('ABS_PATH is not loaded. Direct access is not allowed.');
+}
+?>
 	<table>
 		<tbody>
 <?php
@@ -38,10 +43,10 @@ foreach ($fields as $field) {
 <?php } elseif ($type == 'date') { ?>	
 					<input id='<?php echo $name; ?>'<?php echo $class; ?> type='text' name='<?php echo $name; ?>' value='<?php echo $value; ?>' />
 <?php } elseif ($type == 'radio') { ?>						
-					<?php ca_radio_buttons($field_id, $name, $value, $required); ?>					
+					<?php $this->radio_buttons($field_id, $name, $value, $required); ?>					
 <?php } elseif ($type == 'select') { ?>		
 					<select id='<?php echo $name; ?>'<?php echo $class; ?> name='<?php echo $name; ?>'>
-						<?php ca_select_options($field_id, $value); ?>
+						<?php $this->select_options($field_id, $value); ?>
 					</select>
 <?php } elseif ($type == 'text') { ?>
 					<input id='<?php echo $name; ?>'<?php echo $class; ?> type='text' name='<?php echo $name; ?>' value='<?php echo $value; ?>' />

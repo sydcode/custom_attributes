@@ -1,3 +1,8 @@
+<?php
+if ( !defined('ABS_PATH') ) { 
+	exit('ABS_PATH is not loaded. Direct access is not allowed.');
+}
+?>
 <fieldset class='box show_only'>
 <?php 
 foreach ($fields as $field) { 
@@ -29,10 +34,10 @@ foreach ($fields as $field) {
 <?php } elseif ($type == 'date') { ?>	
 				<input class='search_date' type='text' name='<?php echo $name; ?>' value='<?php echo $value; ?>' />	
 <?php } elseif ($type == 'radio') { ?>	
-				<?php ca_radio_buttons($id, $name, $value, null, true); ?>
+				<?php $this->radio_buttons($id, $name, $value, null, true); ?>
 <?php } elseif ($type == 'select') { ?>		
 				<select class='search_select' name='<?php echo $name; ?>'>
-					<?php ca_select_options($id, $value); ?>
+					<?php $this->select_options($id, $value); ?>
 				</select>
 <?php } elseif ($type == 'text') { ?>
 			<?php if ($search_limits) { ?>

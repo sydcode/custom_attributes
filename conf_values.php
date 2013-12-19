@@ -1,4 +1,8 @@
 <?php
+if ( !defined('ABS_PATH') ) { 
+	exit('ABS_PATH is not loaded. Direct access is not allowed.');
+}
+
 // Process actions
 $action = Params::getParam('plugin_action');
 $group_id = Params::getParam('group_id');
@@ -87,7 +91,7 @@ foreach ($fields as $field) {
 			<ul class='value_list'>
 <?php
 $field_id = Params::getParam('field_id');
-$type = Attributes::newInstance()->getFieldType($field_id);
+$field_type = Attributes::newInstance()->getFieldType($field_id);
 foreach ($values as $value) {
 	$item_id = $value['fk_i_item_id'];
 	$value = trim($value['s_value']);
@@ -106,24 +110,25 @@ foreach ($values as $value) {
 							<input type='hidden' name='file' value='<?php echo osc_plugin_folder(__FILE__); ?>conf_values.php' />
 							<input type='hidden' name='plugin_action' value='edit_value' />		
 							<input type='hidden' name='item_id' value='<?php echo $item_id; ?>' />	
-							<input type='hidden' name='field_id' value='<?php echo $field_id; ?>' />	
+							<input type='hidden' name='field_id' value='<?php echo $field_id; ?>' />
+							<input type='hidden' name='group_id' value='<?php echo $group_id; ?>' />								
 							<li>
-<?php if ($type == 'checkbox') {  ?>
+<?php if ($field_type == 'checkbox') {  ?>
 <?php 	$checked = ($value == 'checked') ? " checked='checked'" : ''; ?>
 								<label>
 								<input class='edit_checkbox' type='checkbox' name='item_value' value='checked'<?php echo $checked; ?> />
 								<?php _e('Tick for "Yes"', CA_PLUGIN_NAME); ?></label>
-<?php } elseif ($type == 'date') { ?>	
+<?php } elseif ($field_type == 'date') { ?>	
 								<input id='<?php echo $name; ?>' class='edit_date' type='text' name='item_value' value='<?php echo $value; ?>' />
-<?php } elseif ($type == 'radio') { ?>						
-								<?php ca_radio_buttons($field_id, 'item_value', $value, $required); ?>								
-<?php } elseif ($type == 'select') { ?>		
+<?php } elseif ($field_type == 'radio') { ?>						
+								<?php CustomAttributes::newInstance()->radio_buttons($field_id, 'item_value', $value); ?>								
+<?php } elseif ($field_type == 'select') { ?>		
 								<select name='item_value'>
-									<?php ca_select_options($field_id, $value); ?>
+									<?php CustomAttributes::newInstance()->select_options($field_id, $value); ?>
 								</select>
-<?php } elseif ($type == 'text') { ?>
+<?php } elseif ($field_type == 'text') { ?>
 								<input id='<?php echo $name; ?>' type='text' name='item_value' value='<?php echo $value; ?>' />
-<?php } elseif ($type == 'textarea') {  ?>
+<?php } elseif ($field_type == 'textarea') {  ?>
 								<textarea id='<?php echo $name; ?>' name='item_value'><?php echo $value; ?></textarea>											
 <?php } ?>							
 							</li>

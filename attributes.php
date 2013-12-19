@@ -1,4 +1,8 @@
 <?php
+if ( !defined('ABS_PATH') ) { 
+	exit('ABS_PATH is not loaded. Direct access is not allowed.');
+}
+
 /**
 * Database functions for Custom Attributes plugin
 * 
@@ -17,7 +21,8 @@ class Attributes extends DAO {
 	 * @var Attributes
 	 */
 	private static $instance;
-	const CA_DATABASE_VERSION = '3';
+	private $folder;
+	const DATABASE_VERSION = '3';
 
 	/**
 	 * It creates a new Attributes object class ir if it has been created
@@ -28,8 +33,8 @@ class Attributes extends DAO {
 	 * @return Attributes
 	 */
 	public static function newInstance() {
-		if(!self::$instance instanceof self) {
-				self::$instance = new self;
+		if (!self::$instance instanceof self) {
+			self::$instance = new self;
 		}
 		return self::$instance;
 	}
@@ -39,23 +44,24 @@ class Attributes extends DAO {
 	 */
 	function __construct() {
 		parent::__construct();
+		$this->folder = basename(dirname(__FILE__));		
 	}
 	
 	/**
 	 * Update database to latest version
-	 * @return boolean (true|false)
+	 * @return boolean
 	 */
 	public function updateDatabase() {
 		$version = osc_get_preference('database_version', CA_PLUGIN_NAME);
-		if (empty($version) || $version != self::CA_DATABASE_VERSION) {
+		if (empty($version) || $version != self::DATABASE_VERSION) {
 			$table_exists = $this->tableExists_Fields();
 			switch ($version) {
 				case 0: 
 					// New installation
 					if ($table_exists) {
-						$this->import('custom_attributes/sql/update0.sql');
+						$this->import( $this->folder . '/sql/update0.sql');
 					} else {
-						$this->import('custom_attributes/sql/struct.sql');
+						$this->import( $this->folder . '/sql/struct.sql');
 					}
 					break;
 				case 1:
@@ -64,9 +70,9 @@ class Attributes extends DAO {
 						// Check for first version of dienast's fork
 						$column_exists = $this->columnExists_Fields('b_range');
 						if ($column_exists) {
-							$this->import('custom_attributes/sql/update2.sql');
+							$this->import( $this->folder . '/sql/update2.sql');
 						} else {
-							$this->import('custom_attributes/sql/update1.sql');
+							$this->import( $this->folder . '/sql/update1.sql');
 						}
 					} else {
 						error_log('Upgrade failed! Custom Attributes table does not exist.', 0);
@@ -76,25 +82,25 @@ class Attributes extends DAO {
 				case 2:
 					// Update from version 2
 					if ($table_exists) {
-						$this->import('custom_attributes/sql/update2.sql');
+						$this->import( $this->folder . '/sql/update2.sql');
 					} else {
 						error_log('Upgrade failed! Custom Attributes table does not exist.', 0);
 						return false;
 					}
 					break;
 			}		
-			osc_set_preference('database_version', self::CA_DATABASE_VERSION, CA_PLUGIN_NAME, 'INTEGER');
+			osc_set_preference('database_version', self::DATABASE_VERSION, CA_PLUGIN_NAME, 'INTEGER');
 			osc_reset_preferences();
 		}
 		return true;
-	}	
+	}
 	
 	/**
 	 * Get name of table storing group categories
 	 * @return string
 	 */
 	public function getTable_Categories() {
-		return DB_TABLE_PREFIX.'t_item_custom_attr_categories';
+		return DB_TABLE_PREFIX . 't_item_custom_attr_categories';
 	}		
 	
 	/**
@@ -102,7 +108,7 @@ class Attributes extends DAO {
 	 * @return string
 	 */
 	public function getTable_Description() {
-		return DB_TABLE_PREFIX.'t_item_description';
+		return DB_TABLE_PREFIX . 't_item_description';
 	}	
 	
 	/**
@@ -110,7 +116,7 @@ class Attributes extends DAO {
 	 * @return string
 	 */
 	public function getTable_Fields() {
-		return DB_TABLE_PREFIX.'t_item_custom_attr_fields';
+		return DB_TABLE_PREFIX . 't_item_custom_attr_fields';
 	}	
 	
 	/**
@@ -118,7 +124,7 @@ class Attributes extends DAO {
 	 * @return string
 	 */
 	public function getTable_Groups() {
-		return DB_TABLE_PREFIX.'t_item_custom_attr_groups';
+		return DB_TABLE_PREFIX . 't_item_custom_attr_groups';
 	}	
 	
 	/**
@@ -126,7 +132,7 @@ class Attributes extends DAO {
 	 * @return string
 	 */
 	public function getTable_Meta() {
-		return DB_TABLE_PREFIX.'t_item_custom_attr_meta';
+		return DB_TABLE_PREFIX . 't_item_custom_attr_meta';
 	}
 
 	/**
@@ -134,7 +140,7 @@ class Attributes extends DAO {
 	 * @return string
 	 */
 	public function getTable_Values() {
-		return DB_TABLE_PREFIX.'t_item_custom_attr_values';
+		return DB_TABLE_PREFIX . 't_item_custom_attr_values';
 	}	
 	
 	/**
@@ -204,7 +210,8 @@ class Attributes extends DAO {
 			return '';
 		}
 		$row = $results->row();
-		return $row['s_name'];	
+		$name = isset($row['s_name']) ? $row['s_name'] : '';
+		return $name;	
 	}	
 
 	/**
@@ -222,7 +229,8 @@ class Attributes extends DAO {
 			return '';
 		}
 		$row = $results->row();
-		return $row['s_heading'];	
+		$heading = isset($row['s_heading']) ? $row['s_heading'] : '';
+		return $heading;	
 	}		
 	
 	/**
@@ -240,7 +248,7 @@ class Attributes extends DAO {
 			return '';
 		}
 		$row = $results->row();
-		if ($row['s_order_type'] == 'custom') {
+		if (!empty($row['s_order_type']) && 'custom' == $row['s_order_type']) {
 			return 'custom';
 		} else {
 			return 'alpha';
@@ -250,7 +258,7 @@ class Attributes extends DAO {
 	/**
 	 * Get group ID from name
 	 * @param string $group_name		 
-	 * @return integer
+	 * @return mixed
 	 */
 	public function getGroupID($group_name) {
 		$this->dao->select('pk_i_id');
@@ -259,10 +267,11 @@ class Attributes extends DAO {
 		$this->dao->limit(1);
 		$results = $this->dao->get();
 		if (!$results) {
-			return '';
+			return null;
 		}
 		$row = $results->row();
-		return $row['pk_i_id'];	
+		$id = isset($row['pk_i_id']) ? $row['pk_i_id'] : null;
+		return $id;	
 	}		
 	
 	/**
@@ -384,7 +393,8 @@ class Attributes extends DAO {
 			return '';
 		}		
 		$row = $results->row();
-		return $row['s_type'];
+		$type = isset($row['s_type']) ? $row['s_type'] : '';
+		return $type;
 	}		
 	
 	/**
@@ -431,7 +441,7 @@ class Attributes extends DAO {
 	 * Get attribute value
 	 * @param string $item_id	 
 	 * @param string $field_id	 
-	 * @return mixed
+	 * @return string
 	 */
 	public function getValue($item_id, $field_id) {
 		$this->dao->select('s_value');
@@ -444,14 +454,15 @@ class Attributes extends DAO {
 			return '';
 		}		
 		$row = $results->row();
-		return $row['s_value'];
+		$value = isset($row['s_value']) ? $row['s_value'] : '';
+		return $value;
 	}	
-
+	
 	/**
 	 * Get attribute options
 	 * @param string $field_id
 	 * @param string $value (selected option)
-	 * @return mixed
+	 * @return string
 	 */
 	public function getOptions($field_id, $value = null) {
 		$this->dao->select('s_options');
@@ -463,10 +474,8 @@ class Attributes extends DAO {
 			return '';
 		}		
 		$row = $results->row();
-		if (is_null($row['s_options'])) {
-			return '';
-		}
-		return $row['s_options'];
+		$options = isset($row['s_options']) ? $row['s_options'] : '';
+		return $options;
 	}		
 
 	/**
@@ -484,7 +493,8 @@ class Attributes extends DAO {
 			return '';
 		}		
 		$row = $results->row();
-		return $row['s_title'];
+		$title = isset($row['s_title']) ? $row['s_title'] : '';
+		return $title;
 	}		
 	
 	/**
@@ -605,10 +615,11 @@ class Attributes extends DAO {
 	 * @return boolean	
 	 */
 	public function setValue($item_id, $field_id, $value) {	
-		$current = $this->getValue($item_id, $field_id);
-		if (is_null($current)) {
+		$exists = $this->valueExists($item_id, $field_id);
+		if (!$exists) {
 			return $this->insertValue($item_id, $field_id, $value);
 		}
+		$current = $this->getValue($item_id, $field_id);
 		if ($value != $current) {
 			$where = array('fk_i_item_id' => $item_id, 'fk_i_field_id' => $field_id);
 			$set = array('s_value' => $value);
@@ -634,6 +645,7 @@ class Attributes extends DAO {
 		foreach ($categories as $category_id) {
 			$this->insertGroupCategory($group_id, $category_id);
 		}
+		return true;
 	}		
 	
 	/**
@@ -645,7 +657,7 @@ class Attributes extends DAO {
 	public function setGroupName($group_id, $name) {	
 		$where = array('pk_i_id' => $group_id);
 		$set = array('s_name' => $name);
-		$this->_update($this->getTable_Groups(), $set, $where);
+		return $this->_update($this->getTable_Groups(), $set, $where);
 	}		
 
 	/**
@@ -657,7 +669,7 @@ class Attributes extends DAO {
 	public function setGroupHeading($group_id, $heading) {	
 		$where = array('pk_i_id' => $group_id);
 		$set = array('s_heading' => $heading);
-		$this->_update($this->getTable_Groups(), $set, $where);
+		return $this->_update($this->getTable_Groups(), $set, $where);
 	}	
 	
 	/**
@@ -669,7 +681,7 @@ class Attributes extends DAO {
 	public function setGroupOrderType($group_id, $order_type) {	
 		$where = array('pk_i_id' => $group_id);
 		$set = array('s_order_type' => $order_type);
-		$this->_update($this->getTable_Groups(), $set, $where);
+		return $this->_update($this->getTable_Groups(), $set, $where);
 	}		
 	
 	/**
@@ -679,14 +691,11 @@ class Attributes extends DAO {
 	 * @return boolean	
 	 */
 	public function setGroupCategories($group_id, $categories) {	
-		$where = array('pk_i_id' => $group_id);
-		$set = array('a_categories' => $categories);
-		$this->_update($this->getTable_Groups(), $set, $where);
-		// Update group categories
 		$this->deleteGroupCategories($group_id);
 		foreach ($categories as $category_id) {
 			$this->insertGroupCategory($group_id, $category_id);
 		}
+		return true;
 	}			
 	
 	/**
@@ -796,6 +805,30 @@ class Attributes extends DAO {
 		$this->dao->where($where);
 		return $this->dao->update();
 	}
+	
+	/**
+	 * Check if attribute value exists
+	 * @param string $item_id	 
+	 * @param string $field_id	 
+	 * @return boolean
+	 */
+	public function valueExists($item_id, $field_id) {
+		$this->dao->select('s_value');
+		$this->dao->from($this->getTable_Values());
+		$this->dao->where('fk_i_item_id', $item_id);
+		$this->dao->where('fk_i_field_id', $field_id);
+		$this->dao->limit(1);
+		$results = $this->dao->get();
+		if (!$results) {
+			return false;
+		}		
+		$row = $results->row();
+		if (isset($row['s_value'])) {
+			return true;
+		} else {
+			return false;
+		}
+	}	
 	
 }
 

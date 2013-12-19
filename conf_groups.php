@@ -1,4 +1,8 @@
 <?php
+if ( !defined('ABS_PATH') ) { 
+	exit('ABS_PATH is not loaded. Direct access is not allowed.');
+}
+
 // Process actions
 $action = Params::getParam('plugin_action');
 $group_id = Params::getParam('group_id');
